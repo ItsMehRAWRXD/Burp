@@ -1,0 +1,158 @@
+﻿  MASMAssemblerPlugin.cpp
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(37,51): error C2838: 'ASSEMBLY_GENERATION': illegal qualified name in member declaration
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(37,51): error C2065: 'ASSEMBLY_GENERATION': undeclared identifier
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(38,50): error C2838: 'MASM_SUPPORT': illegal qualified name in member declaration
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(38,50): error C2065: 'MASM_SUPPORT': undeclared identifier
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(137,27): error C2079: 'masm_code' uses undefined class 'std::basic_stringstream<char,std::char_traits<char>,std::allocator<char>>'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(139,19): error C2297: '<<': not valid as right operand has type 'const char [54]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(139,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(140,19): error C2297: '<<': not valid as right operand has type 'const char [6]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(140,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(141,19): error C2297: '<<': not valid as right operand has type 'const char [22]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(141,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(142,19): error C2297: '<<': not valid as right operand has type 'const char [23]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(142,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(144,19): error C2297: '<<': not valid as right operand has type 'const char [7]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(144,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(145,19): error C2297: '<<': not valid as right operand has type 'const char [17]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(145,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(148,34): error C2297: '<<': not valid as right operand has type 'const char [2]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(148,34): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(149,23): error C2297: '<<': not valid as right operand has type 'std::ios_base &(__cdecl *)(std::ios_base &)'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(149,35): error C2297: '<<': not valid as right operand has type 'const char [2]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(149,74): error C2297: '<<': not valid as right operand has type 'const char [2]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(149,74): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(151,19): error C2297: '<<': not valid as right operand has type 'const char [2]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(151,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(152,19): error C2297: '<<': not valid as right operand has type 'const char [17]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(152,41): error C2297: '<<': not valid as right operand has type 'std::ios_base &(__cdecl *)(std::ios_base &)'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(152,71): error C2297: '<<': not valid as right operand has type 'const char [3]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(152,71): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(154,19): error C2297: '<<': not valid as right operand has type 'const char [7]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(154,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(155,19): error C2297: '<<': not valid as right operand has type 'const char [8]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(155,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(156,19): error C2297: '<<': not valid as right operand has type 'const char [30]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(156,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(157,19): error C2297: '<<': not valid as right operand has type 'const char [34]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(157,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(158,19): error C2297: '<<': not valid as right operand has type 'const char [27]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(158,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(159,19): error C2297: '<<': not valid as right operand has type 'const char [28]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(159,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(160,19): error C2297: '<<': not valid as right operand has type 'const char [9]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(160,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(161,19): error C2297: '<<': not valid as right operand has type 'const char [11]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(161,19): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(167,27): error C2079: 'cpp_code' uses undefined class 'std::basic_stringstream<char,std::char_traits<char>,std::allocator<char>>'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(169,18): error C2297: '<<': not valid as right operand has type 'const char [48]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(169,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(170,18): error C2297: '<<': not valid as right operand has type 'const char [22]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(170,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(171,18): error C2297: '<<': not valid as right operand has type 'const char [22]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(171,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(173,18): error C2297: '<<': not valid as right operand has type 'const char [24]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(173,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18): error C2297: '<<': not valid as right operand has type 'const char [4]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,28): error C2677: binary '<<': no global operator found which takes type 'const std::string' (or there is no acceptable conversion)
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\cstddef(37,27):
+      could be 'std::byte std::operator <<(const std::byte,const _IntType) noexcept'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::byte std::operator <<(const std::byte,const _IntType) noexcept': could not deduce template argument for '__formal'
+              C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\cstddef(36,39):
+              'std::enable_if_t<false,int>' : Failed to specialize alias template
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_string_view.hpp(1976,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::basic_string_view<_Elem,_Traits>)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::basic_string_view<_Elem,_Traits>)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\xstring(3444,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::basic_string<_Elem,_Traits,_Alloc> &)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::basic_string<_Elem,_Traits,_Alloc> &)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\memory(1984,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::shared_ptr<_Ty> &)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::shared_ptr<_Ty> &)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\memory(3792,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::unique_ptr<_Ty2,_Dx2> &)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::unique_ptr<_Ty2,_Dx2> &)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(688,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const char *)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const char *)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(732,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,char)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,char)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(768,31):
+      or       'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,const char *)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,const char *)': could not deduce template argument for 'std::basic_ostream<char,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(813,31):
+      or       'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,char)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,char)': could not deduce template argument for 'std::basic_ostream<char,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(851,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const _Elem *)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const _Elem *)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(894,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,_Elem)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,_Elem)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(930,31):
+      or       'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,const signed char *)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,const signed char *)': could not deduce template argument for 'std::basic_ostream<char,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(936,31):
+      or       'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,signed char)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,signed char)': could not deduce template argument for 'std::basic_ostream<char,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(941,31):
+      or       'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,const unsigned char *)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,const unsigned char *)': could not deduce template argument for 'std::basic_ostream<char,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(947,31):
+      or       'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,unsigned char)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<char,_Traits> &std::operator <<(std::basic_ostream<char,_Traits> &,unsigned char)': could not deduce template argument for 'std::basic_ostream<char,_Traits> &' from '<error type>'
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(1005,9):
+      or       '_Ostr &&std::operator <<(_Ostr &&,const _Ty &)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          '_Ostr &&std::operator <<(_Ostr &&,const _Ty &)': could not deduce template argument for '__formal'
+              C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(1004,5):
+              'std::enable_if_t<false,int>' : Failed to specialize alias template
+      C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(1031,32):
+      or       'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::error_code &)'
+          C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(174,18):
+          'std::basic_ostream<_Elem,_Traits> &std::operator <<(std::basic_ostream<_Elem,_Traits> &,const std::error_code &)': could not deduce template argument for 'std::basic_ostream<_Elem,_Traits> &' from '<error type>'
+  
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(176,18): error C2297: '<<': not valid as right operand has type 'const char [14]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(176,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(177,18): error C2297: '<<': not valid as right operand has type 'const char [34]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(177,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(178,18): error C2297: '<<': not valid as right operand has type 'const char [46]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(178,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(179,18): error C2297: '<<': not valid as right operand has type 'const char [17]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(179,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(180,18): error C2297: '<<': not valid as right operand has type 'const char [42]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(180,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(181,18): error C2297: '<<': not valid as right operand has type 'const char [17]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(181,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(182,18): error C2297: '<<': not valid as right operand has type 'const char [17]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(182,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(183,18): error C2297: '<<': not valid as right operand has type 'const char [11]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(183,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(184,18): error C2297: '<<': not valid as right operand has type 'const char [7]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(184,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(185,18): error C2297: '<<': not valid as right operand has type 'const char [4]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(185,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(187,18): error C2297: '<<': not valid as right operand has type 'const char [14]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(187,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(188,18): error C2297: '<<': not valid as right operand has type 'const char [28]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(188,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(189,18): error C2297: '<<': not valid as right operand has type 'const char [15]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(189,18): warning C4552: '<<': result of expression not used
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(190,18): error C2297: '<<': not valid as right operand has type 'const char [3]'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\Plugins\MASMAssemblerPlugin\MASMAssemblerPlugin.cpp(190,18): warning C4552: '<<': result of expression not used

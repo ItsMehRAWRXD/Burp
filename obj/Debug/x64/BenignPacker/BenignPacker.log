@@ -1,0 +1,12 @@
+﻿  BenignPacker.cpp
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(105,7): error C2869: 'BenignPacker': has already been defined to be a namespace
+      C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\PluginFramework\IPlugin.h(9,11):
+      see declaration of 'BenignPacker'
+  
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(431,5): error C2882: 'BenignPacker': illegal use of namespace identifier in expression
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(431,18): error C2146: syntax error: missing ';' before identifier 'packer'
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(431,18): error C2065: 'packer': undeclared identifier
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(433,10): error C2065: 'packer': undeclared identifier
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(439,9): error C2065: 'packer': undeclared identifier
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(440,9): error C2065: 'packer': undeclared identifier
+C:\Users\Garre\source\repos\FIXED_BenignPacker_Integration\BenignPacker\BenignPacker.cpp(455,9): error C2065: 'packer': undeclared identifier
