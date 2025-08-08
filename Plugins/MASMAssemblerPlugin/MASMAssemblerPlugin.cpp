@@ -206,16 +206,4 @@ private:
 };
 
 // Plugin export functions
-extern "C" {
-    __declspec(dllexport) IPlugin* CreatePlugin() {
-        return new MASMAssemblerPlugin();
-    }
-    
-    __declspec(dllexport) void DestroyPlugin(IPlugin* plugin) {
-        delete plugin;
-    }
-    
-    __declspec(dllexport) uint32_t GetApiVersion() {
-        return BENIGN_PACKER_PLUGIN_API_VERSION;
-    }
-}
+DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
