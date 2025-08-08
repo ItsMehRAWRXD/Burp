@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include <sstream>
 
 using namespace BenignPacker::PluginFramework;
 
@@ -203,4 +204,25 @@ private:
         
         return binary_data;
     }
+
+};
+
+// Plugin export functions
+DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
+/*
+extern "C" {
+    __declspec(dllexport) IPlugin* CreatePlugin() {
+        return new MASMAssemblerPlugin();
+    }
+    
+    __declspec(dllexport) void DestroyPlugin(IPlugin* plugin) {
+        delete plugin;
+    }
+    
+    __declspec(dllexport) uint32_t GetApiVersion() {
+        return BENIGN_PACKER_PLUGIN_API_VERSION;
+    }
+}
+*/
+=======
 };
