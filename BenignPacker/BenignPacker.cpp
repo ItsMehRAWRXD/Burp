@@ -103,7 +103,7 @@ public:
     }
 };
 
-class BenignPacker {
+class BenignPackerApp {
 private:
     PluginManager plugin_manager;
     std::map<std::string, std::string> global_settings;
@@ -429,7 +429,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 };
 
 int main(int argc, char* argv[]) {
-    BenignPacker packer;
+    BenignPackerApp packer;
     
     if (!packer.Initialize()) {
         std::cerr << "Failed to initialize BenignPacker" << std::endl;

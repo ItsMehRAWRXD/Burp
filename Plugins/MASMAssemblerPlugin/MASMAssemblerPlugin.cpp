@@ -9,6 +9,7 @@
 #include <windows.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <filesystem>
 #include <sstream>
 
@@ -203,6 +204,7 @@ private:
         
         return binary_data;
     }
+
 };
 
 // Plugin export functions
@@ -222,3 +224,5 @@ extern "C" {
     }
 }
 */
+=======
+};

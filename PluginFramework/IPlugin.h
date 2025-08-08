@@ -5,6 +5,7 @@
 #include <memory>
 #include <functional>
 #include <map>
+#include <cstdint>
 
 namespace BenignPacker {
     namespace PluginFramework {
@@ -37,6 +38,8 @@ namespace BenignPacker {
             POLYMORPHIC_CODE = 0x00000200,
             COMPANY_PROFILES = 0x00000400,
             RING0_RING3 = 0x00000800,
+            ASSEMBLY_GENERATION = 0x00001000,
+            MASM_SUPPORT = 0x00002000,
             ALL_CAPABILITIES = 0xFFFFFFFF
         };
 
