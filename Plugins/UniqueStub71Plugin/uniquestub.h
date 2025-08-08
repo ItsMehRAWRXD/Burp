@@ -337,4 +337,4 @@ namespace UniqueStubUtils {
     }
 }
 
-#endif // UNIQUESTUB_H#pragma once
+#endif // UNIQUESTUB_H

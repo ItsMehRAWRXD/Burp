@@ -206,6 +206,8 @@ private:
 };
 
 // Plugin export functions
+DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
+/*
 extern "C" {
     __declspec(dllexport) IPlugin* CreatePlugin() {
         return new MASMAssemblerPlugin();
@@ -219,3 +221,4 @@ extern "C" {
         return BENIGN_PACKER_PLUGIN_API_VERSION;
     }
 }
+*/
