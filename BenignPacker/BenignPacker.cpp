@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 #include "../PluginFramework/IPlugin.h"
 
 using namespace BenignPacker::PluginFramework;

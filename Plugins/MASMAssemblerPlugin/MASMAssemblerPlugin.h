@@ -10,6 +10,4 @@
 #include <windows.h>
 #include <string>
 #include <vector>
-#include <map>
 
-// Plugin export functions are declared via DECLARE_PLUGIN_EXPORTS macro in .cpp file

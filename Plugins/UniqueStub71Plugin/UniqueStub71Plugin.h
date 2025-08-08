@@ -1,3 +1,4 @@
+
 /*
 ========================================================================================
 UNIQUE STUB 71 PLUGIN - BENIGN PACKER INTEGRATION
@@ -13,7 +14,6 @@ FEATURES:
 - Visual Studio 2022 Native Compilation
 ========================================================================================
 */
-
 #ifndef UNIQUE_STUB_71_PLUGIN_H
 #define UNIQUE_STUB_71_PLUGIN_H
 
@@ -298,3 +298,5 @@ extern "C" {
 #define MUTEX_SYSTEMS_COUNT 40
 
 #endif // UNIQUE_STUB_71_PLUGIN_H
+=======
+#pragma once
