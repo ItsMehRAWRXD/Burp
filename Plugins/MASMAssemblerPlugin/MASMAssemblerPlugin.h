@@ -12,9 +12,4 @@
 #include <vector>
 #include <map>
 
-// Plugin export functions
-extern "C" {
-    __declspec(dllexport) BenignPacker::PluginFramework::IPlugin* CreatePlugin();
-    __declspec(dllexport) void DestroyPlugin(BenignPacker::PluginFramework::IPlugin* plugin);
-    __declspec(dllexport) uint32_t GetApiVersion();
-}
+// No exported function declarations here; exports are provided via DECLARE_PLUGIN_EXPORTS in the .cpp

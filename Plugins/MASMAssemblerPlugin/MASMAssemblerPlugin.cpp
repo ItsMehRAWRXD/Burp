@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <sstream>
 
 using namespace BenignPacker::PluginFramework;
 
@@ -34,8 +35,7 @@ public:
         config.author = "ItsMehRAWRXD/Star Framework";
         config.description = "MASM to C++ integration plugin for assembly stub generation";
         config.type = PluginType::STUB_GENERATOR;
-        config.capabilities = PluginCapabilities::ASSEMBLY_GENERATION |
-                             PluginCapabilities::MASM_SUPPORT |
+        config.capabilities = PluginCapabilities::MASM_INTEGRATION |
                              PluginCapabilities::POLYMORPHIC_CODE;
         config.api_version = BENIGN_PACKER_PLUGIN_API_VERSION;
         return config;
@@ -205,17 +205,5 @@ private:
     }
 };
 
-// Plugin export functions
-extern "C" {
-    __declspec(dllexport) IPlugin* CreatePlugin() {
-        return new MASMAssemblerPlugin();
-    }
-    
-    __declspec(dllexport) void DestroyPlugin(IPlugin* plugin) {
-        delete plugin;
-    }
-    
-    __declspec(dllexport) uint32_t GetApiVersion() {
-        return BENIGN_PACKER_PLUGIN_API_VERSION;
-    }
-}
+// Plugin export functions aligned with framework
+DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
