@@ -204,6 +204,4 @@ private:
         return binary_data;
     }
 };
-
-// Plugin export functions aligned with framework
 DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
