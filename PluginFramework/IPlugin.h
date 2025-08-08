@@ -5,6 +5,7 @@
 #include <memory>
 #include <functional>
 #include <map>
+#include <cstdint>
 
 namespace BenignPacker {
     namespace PluginFramework {

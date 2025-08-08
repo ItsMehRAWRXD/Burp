@@ -11,7 +11,6 @@
 #include <fstream>
 #include <filesystem>
 #include <sstream>
-#include <iomanip>
 
 using namespace BenignPacker::PluginFramework;
 
@@ -205,6 +204,4 @@ private:
         return binary_data;
     }
 };
-
-// Plugin export functions
 DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
