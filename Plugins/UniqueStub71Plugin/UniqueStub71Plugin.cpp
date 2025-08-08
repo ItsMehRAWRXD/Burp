@@ -29,7 +29,11 @@
 
 using namespace BenignPacker::PluginFramework;
 
+namespace BenignPacker { namespace PluginFramework {
 class UniqueStub71Plugin : public IStubGenerator {
+public:
+    using IPluginBase = IPlugin;
+
 private:
     std::string last_error;
     std::map<std::string, std::string> plugin_settings;
@@ -667,6 +671,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
         }
     }
 };
+}} // namespace BenignPacker::PluginFramework
 
 // Plugin export functions
 DECLARE_PLUGIN_EXPORTS(UniqueStub71Plugin)
