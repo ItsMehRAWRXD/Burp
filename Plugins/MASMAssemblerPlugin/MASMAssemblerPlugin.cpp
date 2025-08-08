@@ -9,8 +9,8 @@
 #include <windows.h>
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 #include <sstream>
+#include <filesystem>
 
 using namespace BenignPacker::PluginFramework;
 
@@ -204,4 +204,3 @@ private:
         return binary_data;
     }
 };
-DECLARE_PLUGIN_EXPORTS(MASMAssemblerPlugin)
