@@ -102,7 +102,7 @@ public:
     }
 };
 
-class BenignPacker {
+class BenignPackerApp {
 private:
     PluginManager plugin_manager;
     std::map<std::string, std::string> global_settings;

@@ -40,8 +40,7 @@ FEATURES:
 #include <wininet.h>
 #include <tlhelp32.h>
 #include <psapi.h>
-#include <shell32.h>
-#include <advapi32.h>
+#include <shlobj.h>
 #else
 #include <sys/mman.h>
 #include <unistd.h>
