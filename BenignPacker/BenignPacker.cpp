@@ -428,7 +428,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 };
 
 int main(int argc, char* argv[]) {
-    BenignPacker packer;
+    BenignPackerApp packer;
     
     if (!packer.Initialize()) {
         std::cerr << "Failed to initialize BenignPacker" << std::endl;
