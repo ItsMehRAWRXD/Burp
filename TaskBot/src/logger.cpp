@@ -7,7 +7,7 @@
 
 namespace TaskBot {
 
-Logger::Logger() : currentLevel_(LogLevel::INFO), consoleOutput_(true) {}
+Logger::Logger() : currentLevel_(LogLevel::DEBUG), consoleOutput_(true) {}
 
 Logger::~Logger() {
     // Ensure any pending logs are written
