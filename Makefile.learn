@@ -1,0 +1,15 @@
+CXX = g++
+CXXFLAGS = -std=c++17 -O2
+
+learn: LearnRE.cpp
+	$(CXX) $(CXXFLAGS) LearnRE.cpp -o learn
+
+clean:
+	rm -f learn vuln vuln.c shellcode.bin
+
+test: learn
+	./learn vuln
+	gcc -fno-stack-protector -z execstack vuln.c -o vuln 2>/dev/null || echo "gcc not found"
+	./learn shellcode
+
+.PHONY: clean test
