@@ -1,0 +1,20 @@
+# Simple Makefile for TaskBot Hello World
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall
+LDFLAGS = -luser32 -lshell32
+
+TARGET = taskbot_hello.exe
+SOURCE = src/main_simple.cpp
+
+all: $(TARGET)
+
+$(TARGET): $(SOURCE)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SOURCE) $(LDFLAGS)
+
+clean:
+	rm -f $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
+
+.PHONY: all clean run

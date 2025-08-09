@@ -1,0 +1,356 @@
+#include "../include/task_bot.h"
+#include "../include/autopilot.h"
+#include "../include/ide_integration.h"
+#include <iostream>
+#include <memory>
+#include <csignal>
+
+using namespace TaskBot;
+
+// Global task manager for signal handling
+TaskManager* g_taskManager = nullptr;
+
+// Signal handler for graceful shutdown
+void signalHandler(int signal) {
+    if (signal == SIGINT || signal == SIGTERM) {
+        std::cout << "\nReceived shutdown signal. Stopping TaskBot...\n";
+        if (g_taskManager) {
+            g_taskManager->stop();
+        }
+    }
+}
+
+// Custom task example
+class BackupTask : public Task {
+public:
+    BackupTask(const std::string& sourceDir, const std::string& backupDir)
+        : Task("Backup " + sourceDir, Priority::NORMAL),
+          sourceDir_(sourceDir), backupDir_(backupDir) {}
+    
+    bool execute() override {
+        Logger::getInstance().info("Starting backup from " + sourceDir_ + " to " + backupDir_);
+        
+        // Create backup directory
+        if (!FileOperations::createDirectory(backupDir_)) {
+            return false;
+        }
+        
+        // Get list of files
+        auto files = FileOperations::listDirectory(sourceDir_);
+        int backed_up = 0;
+        
+        for (const auto& file : files) {
+            std::string sourcePath = sourceDir_ + "/" + file;
+            std::string destPath = backupDir_ + "/" + file;
+            
+            if (FileOperations::copyFile(sourcePath, destPath)) {
+                backed_up++;
+            }
+        }
+        
+        Logger::getInstance().info("Backup completed: " + std::to_string(backed_up) + 
+                                  " files backed up");
+        return true;
+    }
+    
+    std::string getDescription() const override {
+        return "Backup files from " + sourceDir_ + " to " + backupDir_;
+    }
+    
+private:
+    std::string sourceDir_;
+    std::string backupDir_;
+};
+
+// System health check task
+class HealthCheckTask : public Task {
+public:
+    HealthCheckTask() : Task("System Health Check", Priority::HIGH) {}
+    
+    bool execute() override {
+        auto info = SystemMonitor::getSystemInfo();
+        
+        Logger::getInstance().info("=== System Health Check ===");
+        Logger::getInstance().info("CPU Usage: " + std::to_string(info.cpuUsage) + "%");
+        Logger::getInstance().info("Memory: " + Utils::formatBytes(info.totalMemory - info.availableMemory) + 
+                                  " / " + Utils::formatBytes(info.totalMemory));
+        Logger::getInstance().info("Disk: " + Utils::formatBytes(info.totalDisk - info.availableDisk) + 
+                                  " / " + Utils::formatBytes(info.totalDisk));
+        Logger::getInstance().info("Process Memory: " + std::to_string(info.processMemoryMB) + " MB");
+        
+        // Alert if resources are high
+        if (info.cpuUsage > 80.0) {
+            Logger::getInstance().warning("High CPU usage detected!");
+        }
+        
+        double memoryPercent = 100.0 * (info.totalMemory - info.availableMemory) / info.totalMemory;
+        if (memoryPercent > 80.0) {
+            Logger::getInstance().warning("High memory usage detected!");
+        }
+        
+        return true;
+    }
+    
+    std::string getDescription() const override {
+        return "Perform system health check and log resource usage";
+    }
+};
+
+void demonstrateAutoPilot() {
+    std::cout << "=== TaskBot AutoPilot Demonstration ===\n\n";
+    std::cout << "WARNING: This will control your mouse and keyboard!\n";
+    std::cout << "Press Ctrl+C to stop at any time.\n\n";
+    
+    // Initialize AutoPilot
+    auto autoPilot = std::make_shared<AutoPilotManager>();
+    
+    // Create task manager
+    TaskManager taskManager;
+    g_taskManager = &taskManager;
+    
+    // 1. Mouse automation demo
+    std::cout << "1. Mouse Automation Demo\n";
+    auto mouseTask = std::make_shared<AutoPilotTask>(
+        "Mouse Demo",
+        AutoPilotTask::Operation::EXECUTE_WORKFLOW,
+        autoPilot,
+        std::map<std::string, std::string>{{"workflow", "switch_windows"}}
+    );
+    taskManager.addTask(mouseTask);
+    
+    // 2. Keyboard automation demo
+    std::cout << "2. Keyboard Automation Demo\n";
+    autoPilot->registerWorkflow("type_demo", [&autoPilot]() {
+        std::cout << "[Demo] Typing demonstration text" << std::endl;
+        autoPilot->getInputSimulator().typeText("Hello from TaskBot AutoPilot! ");
+        autoPilot->getInputSimulator().typeText("I can automate any application.");
+        return true;
+    });
+    
+    // 3. Web search integration demo
+    std::cout << "3. Web Search Integration Demo\n";
+    auto searchTask = std::make_shared<AutoPilotTask>(
+        "Search and Automate",
+        AutoPilotTask::Operation::CUSTOM_AUTOMATION,
+        autoPilot,
+        std::map<std::string, std::string>{{"task", "open terminal and list files"}}
+    );
+    taskManager.addTask(searchTask);
+    
+    // 4. Screenshot capture demo
+    std::cout << "4. Screenshot Capture Demo\n";
+    auto screenshotTask = std::make_shared<AutoPilotTask>(
+        "Take Screenshot",
+        AutoPilotTask::Operation::EXECUTE_WORKFLOW,
+        autoPilot,
+        std::map<std::string, std::string>{{"workflow", "take_screenshot"}}
+    );
+    taskManager.addTask(screenshotTask);
+    
+    // 5. Application synchronization demo
+    std::cout << "5. Application Synchronization Demo (if multiple apps are open)\n";
+    auto syncTask = std::make_shared<AutoPilotTask>(
+        "Sync Apps",
+        AutoPilotTask::Operation::EXECUTE_WORKFLOW,
+        autoPilot,
+        std::map<std::string, std::string>{{"workflow", "copy_paste_between_apps"}}
+    );
+    taskManager.addTask(syncTask);
+    
+    // Start execution
+    std::cout << "\n--- Starting AutoPilot Demonstration ---\n";
+    std::cout << "The bot will now take control of your system\n";
+    std::cout << "Press Ctrl+C to stop\n\n";
+    
+    taskManager.start();
+    
+    // Wait for completion
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+    
+    taskManager.stop();
+    
+    // Show results
+    auto completed = taskManager.getCompletedTasks();
+    std::cout << "\n--- AutoPilot Tasks Completed ---\n";
+    for (const auto& task : completed) {
+        std::cout << "- " << task->getName() << " [" 
+                  << (task->getStatus() == TaskStatus::COMPLETED ? "SUCCESS" : "FAILED") 
+                  << "]\n";
+    }
+}
+
+void demonstrateTaskBot() {
+    std::cout << "=== TaskBot Core Demonstration ===\n\n";
+    
+    // Initialize components
+    Logger& logger = Logger::getInstance();
+    logger.setLogFile("taskbot.log");
+    logger.setLogLevel(Logger::LogLevel::DEBUG);
+    
+    ConfigManager config("taskbot.config");
+    config.setString("bot_name", "TaskBot v1.0");
+    config.setInt("max_workers", 4);
+    config.setBool("enable_monitoring", true);
+    config.setDouble("check_interval", 60.0);
+    config.save();
+    
+    // Create task manager
+    TaskManager taskManager;
+    g_taskManager = &taskManager;
+    
+    // 1. File Operations Demo
+    std::cout << "1. File Operations Demo\n";
+    auto createTask = std::make_shared<FileTask>(
+        "Create test file",
+        FileTask::Operation::CREATE,
+        "test_data.txt",
+        "This is test data created by TaskBot.\nTimestamp: " + Utils::getCurrentTimestamp()
+    );
+    taskManager.addTask(createTask);
+    
+    // 2. Command Execution Demo
+    std::cout << "2. Command Execution Demo\n";
+    auto listTask = std::make_shared<CommandTask>(
+        "List current directory",
+        "ls -la"
+    );
+    taskManager.addTask(listTask);
+    
+    // 3. System Monitoring Demo
+    std::cout << "3. System Monitoring Demo\n";
+    auto healthTask = std::make_shared<HealthCheckTask>();
+    taskManager.addTask(healthTask);
+    
+    // 4. Scheduled Task Demo
+    std::cout << "4. Scheduled Task Demo\n";
+    auto futureTime = std::chrono::system_clock::now() + std::chrono::seconds(5);
+    auto delayedTask = std::make_shared<CommandTask>("Delayed echo", "echo 'This task was scheduled!'");
+    auto scheduledTask = std::make_shared<ScheduledTask>("Scheduled echo", delayedTask, futureTime);
+    taskManager.addTask(scheduledTask);
+    
+    // 5. Recurring Task Demo
+    std::cout << "5. Recurring Task Demo\n";
+    auto monitorTask = std::make_shared<MonitorTask>(
+        "CPU Monitor",
+        [](const SystemMonitor::SystemInfo& info) {
+            return info.cpuUsage > 50.0; // Trigger if CPU > 50%
+        },
+        [](const SystemMonitor::SystemInfo& info) {
+            Logger::getInstance().warning("High CPU detected: " + 
+                                        std::to_string(info.cpuUsage) + "%");
+        }
+    );
+    auto recurringMonitor = std::make_shared<RecurringTask>(
+        "Recurring CPU Monitor",
+        monitorTask,
+        std::chrono::seconds(10),
+        3 // Run max 3 times
+    );
+    taskManager.addTask(recurringMonitor);
+    
+    // 6. Custom Task Demo
+    std::cout << "6. Custom Task Demo\n";
+    FileOperations::createDirectory("test_source");
+    FileOperations::createFile("test_source/file1.txt", "Content of file 1");
+    FileOperations::createFile("test_source/file2.txt", "Content of file 2");
+    
+    auto backupTask = std::make_shared<BackupTask>("test_source", "test_backup");
+    taskManager.addTask(backupTask);
+    
+    // 7. Priority Task Demo
+    std::cout << "7. Priority Task Demo\n";
+    auto criticalTask = std::make_shared<CommandTask>("Critical task", "echo 'CRITICAL TASK'");
+    criticalTask->Task::Task("Critical echo", Priority::CRITICAL); // High priority
+    taskManager.addTask(criticalTask);
+    
+    // Start the task manager
+    std::cout << "\n--- Starting TaskBot ---\n";
+    std::cout << "Press Ctrl+C to stop\n\n";
+    
+    taskManager.start();
+    
+    // Wait for tasks to complete or interrupt
+    while (taskManager.isRunning()) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        
+        // Show pending tasks
+        auto pending = taskManager.getPendingTasks();
+        if (!pending.empty()) {
+            std::cout << "Pending tasks: " << pending.size() << std::endl;
+        }
+    }
+    
+    // Show completed tasks
+    auto completed = taskManager.getCompletedTasks();
+    std::cout << "\n--- Completed Tasks ---\n";
+    for (const auto& task : completed) {
+        std::cout << "- " << task->getName() << " [" 
+                  << (task->getStatus() == TaskStatus::COMPLETED ? "SUCCESS" : "FAILED") 
+                  << "]\n";
+    }
+    
+    // Cleanup
+    FileOperations::deleteFile("test_data.txt");
+    CommandExecutor::execute("rm -rf test_source test_backup");
+}
+
+int main(int argc, char* argv[]) {
+    // Set up signal handling
+    std::signal(SIGINT, signalHandler);
+    std::signal(SIGTERM, signalHandler);
+    
+    try {
+        if (argc > 1) {
+            std::string arg = argv[1];
+            if (arg == "--demo") {
+                demonstrateTaskBot();
+            } else if (arg == "--autopilot") {
+                demonstrateAutoPilot();
+            } else if (arg == "--help") {
+                // Show help
+            } else {
+                std::cout << "Unknown option: " << arg << std::endl;
+                return 1;
+            }
+        } else {
+            std::cout << "TaskBot - A Self-Sustained Automation Bot with AutoPilot\n";
+            std::cout << "========================================================\n\n";
+            std::cout << "Usage: " << argv[0] << " [options]\n";
+            std::cout << "Options:\n";
+            std::cout << "  --demo        Run core TaskBot demonstration\n";
+            std::cout << "  --autopilot   Run AutoPilot system demonstration\n";
+            std::cout << "  --help        Show this help message\n\n";
+            
+            std::cout << "Core Features:\n";
+            std::cout << "- Multi-threaded task execution with priority queue\n";
+            std::cout << "- File operations (create, read, update, delete, copy, move)\n";
+            std::cout << "- System monitoring (CPU, memory, disk usage)\n";
+            std::cout << "- Command execution with timeout support\n";
+            std::cout << "- Scheduled and recurring tasks\n";
+            std::cout << "- Configuration management\n";
+            std::cout << "- Comprehensive logging system\n";
+            std::cout << "- Custom task creation\n\n";
+            
+            std::cout << "AutoPilot Features:\n";
+            std::cout << "- System-wide keyboard and mouse automation\n";
+            std::cout << "- Application window management and control\n";
+            std::cout << "- Screen capture and OCR capabilities\n";
+            std::cout << "- Web search integration for automation\n";
+            std::cout << "- Macro recording and playback\n";
+            std::cout << "- Multi-application orchestration\n";
+            std::cout << "- IDE integration with code completion\n";
+            std::cout << "- Automated data extraction and entry\n\n";
+            
+            std::cout << "Example usage in your code:\n";
+            std::cout << "  TaskManager manager;\n";
+            std::cout << "  auto task = std::make_shared<CommandTask>(\"List files\", \"ls -la\");\n";
+            std::cout << "  manager.addTask(task);\n";
+            std::cout << "  manager.start();\n";
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+    
+    return 0;
+}
