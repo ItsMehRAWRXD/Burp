@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "steps": [
+    { "action": "print", "params": {"message": "Hello, {who}!"} },
+    { "action": "set", "params": {"file_path": "/workspace/selfbot/output/hello.txt"} },
+    { "action": "write_file", "params": {"path": "{file_path}", "content": "Generated for {who} at {timestamp}"} },
+    { "action": "run", "params": {"cmd": ["bash", "-lc", "echo file contains: && cat {file_path}"], "to": "echo_output"} },
+    { "action": "print", "params": {"message": "Command output was:\n{echo_output}"} },
+    { "action": "call_self", "params": {"steps": [
+      {"action": "print", "params": {"message": "Running a subtask for {who}"}},
+      {"action": "sleep", "params": {"seconds": 0.2}},
+      {"action": "print", "params": {"message": "Subtask done."}}
+    ]}}
+  ]
+}
