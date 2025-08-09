@@ -1,45 +1,8 @@
-# Selfbot (non-AI automation)
+# Rent A Coder Template (via Selfbot)
 
-A small, dependency-free Python CLI that runs JSON-defined tasks and can call itself for subtasks. It also supports a file-based task queue.
+This repository includes a minimal, dependency-free Python CLI that can execute a single JSON task template to scaffold, build, run, and zip a small C++ project.
 
-## Usage
-
-- Run a single task file:
-
-```
-python3 /workspace/selfbot/selfbot.py run --task-file /workspace/selfbot/tasks/example.json --var who=World --var timestamp=$(date -Is)
-```
-
-- Watch a queue directory and execute dropped tasks:
-
-```
-python3 /workspace/selfbot/selfbot.py watch --queue-dir /workspace/selfbot/queue --verbose
-```
-
-Then drop JSON task files into the queue directory. Results are moved to `_done` or `_failed`.
-
-## Task schema
-
-Minimal shape:
-
-```json
-{
-  "name": "task-name",
-  "steps": [
-    { "action": "print", "params": {"message": "Hello"} }
-  ]
-}
-```
-
-Supported actions: `print`, `set`, `write_file`, `read_file`, `run`, `http_get`, `sleep`, `copy`, `call_self`.
-
-Use `{var}` placeholders in strings to reference variables set via `--var/--varjson`, `set`, or outputs from actions.
-
-## Rent A Coder workflow (C++)
-
-Actions: `cpp_scaffold`, `cpp_add_class`, `cpp_write_main`, `cpp_compile`, `cpp_run_binary`, `zip_project`.
-
-Example job:
+## Run the template
 
 ```
 python3 /workspace/selfbot/selfbot.py run \
@@ -50,7 +13,18 @@ python3 /workspace/selfbot/selfbot.py run \
   --verbose | cat
 ```
 
-Result:
+Results:
 - Project at `/workspace/rac/MyProject`
 - Binary at `/workspace/rac/MyProject/build/MyApp` (also copied to `bin/`)
 - Zip at `/workspace/rac/MyProject.zip`
+
+## Template reference
+
+Task file: `/workspace/selfbot/tasks/rentacoder.json`
+
+Variables:
+- `project_dir`: Absolute path for the project directory
+- `app_name`: Binary and project name
+- `class_name`: Class to generate (e.g., `Greeter`)
+
+Actions used (internals): `cpp_scaffold`, `cpp_add_class`, `cpp_write_main`, `cpp_compile`, `cpp_run_binary`, `zip_project`, `print`.
