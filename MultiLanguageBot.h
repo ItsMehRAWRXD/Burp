@@ -29,7 +29,12 @@ enum class Language {
     SCALA,
     PERL,
     LUA,
-    DART
+    DART,
+    ASM_X86,
+    ASM_X64,
+    ASM_ARM,
+    ASM_MIPS,
+    ASM_RISCV
 };
 
 // Language configuration structure
@@ -105,6 +110,13 @@ private:
     void initializeTemplates();
     std::string replaceTokens(const std::string& tmpl, const std::map<std::string, std::string>& tokens);
     std::string generateRandomName(const std::string& prefix);
+    
+    // Assembly-specific generators
+    std::string generateX86HelloWorld();
+    std::string generateX64HelloWorld();
+    std::string generateARMHelloWorld();
+    std::string generateMIPSHelloWorld();
+    std::string generateRISCVHelloWorld();
 };
 
 // Multi-language code executor

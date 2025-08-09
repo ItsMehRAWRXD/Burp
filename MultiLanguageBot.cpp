@@ -52,6 +52,26 @@ LanguageCodeGenerator::LanguageCodeGenerator(Language lang, std::shared_ptr<Logg
             config = {"Shell", ".sh", "", "bash", "bash {source}", "", 
                      {"#!/bin/bash"}, {}, false, true};
             break;
+        case Language::ASM_X86:
+            config = {"Assembly x86", ".asm", "nasm", "", "nasm -f elf32 {source} -o {output}.o && ld -m elf_i386 {output}.o -o {output}", "", 
+                     {".section .data", ".section .text", ".global _start"}, {}, true, false};
+            break;
+        case Language::ASM_X64:
+            config = {"Assembly x64", ".s", "as", "", "as --64 {source} -o {output}.o && ld {output}.o -o {output}", "", 
+                     {".section .data", ".section .text", ".global _start"}, {}, true, false};
+            break;
+        case Language::ASM_ARM:
+            config = {"Assembly ARM", ".s", "arm-linux-gnueabi-as", "", "arm-linux-gnueabi-as {source} -o {output}.o && arm-linux-gnueabi-ld {output}.o -o {output}", "", 
+                     {".section .data", ".section .text", ".global _start"}, {}, true, false};
+            break;
+        case Language::ASM_MIPS:
+            config = {"Assembly MIPS", ".s", "mips-linux-gnu-as", "", "mips-linux-gnu-as {source} -o {output}.o && mips-linux-gnu-ld {output}.o -o {output}", "", 
+                     {".data", ".text", ".globl main"}, {}, true, false};
+            break;
+        case Language::ASM_RISCV:
+            config = {"Assembly RISC-V", ".s", "riscv64-linux-gnu-as", "", "riscv64-linux-gnu-as {source} -o {output}.o && riscv64-linux-gnu-ld {output}.o -o {output}", "", 
+                     {".section .data", ".section .text", ".global _start"}, {}, true, false};
+            break;
         default:
             config = {"Unknown", ".txt", "", "", "", "", {}, {}, false, false};
     }
@@ -133,6 +153,114 @@ void LanguageCodeGenerator::initializeTemplates() {
             };
             break;
             
+        case Language::TYPESCRIPT:
+            classTemplates = {
+                "class {NAME} {\n    constructor() {\n        this.data = [];\n    }\n    \n    process() {\n        return `Processing ${this.data.length} items`;\n    }\n}",
+                "class {NAME} extends EventEmitter {\n    constructor(options = {}) {\n        super();\n        this.options = options;\n    }\n    \n    async execute() {\n        this.emit('started');\n        // Implementation here\n        this.emit('completed');\n    }\n}"
+            };
+            functionTemplates = {
+                "function {NAME}(...args) {\n    console.log(`Function {NAME} called with:`, args);\n    return args.length;\n}",
+                "const {NAME} = async (data) => {\n    const result = await processData(data);\n    return result;\n};",
+                "const {NAME} = (function() {\n    let cache = new Map();\n    return function(key) {\n        if (!cache.has(key)) {\n            cache.set(key, expensiveOperation(key));\n        }\n        return cache.get(key);\n    };\n})();"
+            };
+            break;
+            
+        case Language::PHP:
+            classTemplates = {
+                "class {NAME} {\n    constructor() {\n        this.data = [];\n    }\n    \n    process() {\n        return `Processing ${this.data.length} items`;\n    }\n}",
+                "class {NAME} extends EventEmitter {\n    constructor(options = {}) {\n        super();\n        this.options = options;\n    }\n    \n    async execute() {\n        this.emit('started');\n        // Implementation here\n        this.emit('completed');\n    }\n}"
+            };
+            functionTemplates = {
+                "function {NAME}(...args) {\n    console.log(`Function {NAME} called with:`, args);\n    return args.length;\n}",
+                "const {NAME} = async (data) => {\n    const result = await processData(data);\n    return result;\n};",
+                "const {NAME} = (function() {\n    let cache = new Map();\n    return function(key) {\n        if (!cache.has(key)) {\n            cache.set(key, expensiveOperation(key));\n        }\n        return cache.get(key);\n    };\n})();"
+            };
+            break;
+            
+        case Language::RUBY:
+            classTemplates = {
+                "class {NAME} {\n    constructor() {\n        this.data = [];\n    }\n    \n    process() {\n        return `Processing ${this.data.length} items`;\n    }\n}",
+                "class {NAME} extends EventEmitter {\n    constructor(options = {}) {\n        super();\n        this.options = options;\n    }\n    \n    async execute() {\n        this.emit('started');\n        // Implementation here\n        this.emit('completed');\n    }\n}"
+            };
+            functionTemplates = {
+                "function {NAME}(...args) {\n    console.log(`Function {NAME} called with:`, args);\n    return args.length;\n}",
+                "const {NAME} = async (data) => {\n    const result = await processData(data);\n    return result;\n};",
+                "const {NAME} = (function() {\n    let cache = new Map();\n    return function(key) {\n        if (!cache.has(key)) {\n            cache.set(key, expensiveOperation(key));\n        }\n        return cache.get(key);\n    };\n})();"
+            };
+            break;
+            
+        case Language::SHELL:
+            classTemplates = {
+                "class {NAME} {\n    constructor() {\n        this.data = [];\n    }\n    \n    process() {\n        return `Processing ${this.data.length} items`;\n    }\n}",
+                "class {NAME} extends EventEmitter {\n    constructor(options = {}) {\n        super();\n        this.options = options;\n    }\n    \n    async execute() {\n        this.emit('started');\n        // Implementation here\n        this.emit('completed');\n    }\n}"
+            };
+            functionTemplates = {
+                "function {NAME}(...args) {\n    console.log(`Function {NAME} called with:`, args);\n    return args.length;\n}",
+                "const {NAME} = async (data) => {\n    const result = await processData(data);\n    return result;\n};",
+                "const {NAME} = (function() {\n    let cache = new Map();\n    return function(key) {\n        if (!cache.has(key)) {\n            cache.set(key, expensiveOperation(key));\n        }\n        return cache.get(key);\n    };\n})();"
+            };
+            break;
+            
+                 case Language::ASM_X86:
+             classTemplates = {
+                 "; {NAME} data structure (x86)\n.section .data\n{NAME}_data:\n    .long 0\n    .long 0\n    .long 0\n.section .text\n.global {NAME}_init\n{NAME}_init:\n    push %ebp\n    mov %esp, %ebp\n    mov $0, {NAME}_data\n    pop %ebp\n    ret",
+                 "; {NAME} buffer structure\n.section .bss\n{NAME}_buffer:\n    .space 256\n.section .text\n.global {NAME}_clear\n{NAME}_clear:\n    push %edi\n    mov ${NAME}_buffer, %edi\n    mov $256, %ecx\n    xor %eax, %eax\n    rep stosb\n    pop %edi\n    ret"
+             };
+             functionTemplates = {
+                 "; Function {NAME} (x86)\n.section .text\n.global {NAME}\n{NAME}:\n    push %ebp\n    mov %esp, %ebp\n    ; Function body here\n    mov $0, %eax\n    pop %ebp\n    ret",
+                 "; {NAME} with parameter\n.section .text\n.global {NAME}\n{NAME}:\n    push %ebp\n    mov %esp, %ebp\n    mov 8(%ebp), %eax  ; First parameter\n    add $1, %eax       ; Increment\n    pop %ebp\n    ret",
+                 "; {NAME} system call wrapper\n.section .text\n.global {NAME}\n{NAME}:\n    push %ebp\n    mov %esp, %ebp\n    mov $1, %eax       ; sys_exit\n    mov $0, %ebx       ; exit status\n    int $0x80          ; system call\n    pop %ebp\n    ret"
+             };
+             break;
+            
+                 case Language::ASM_X64:
+             classTemplates = {
+                 "; {NAME} data structure (x64)\n.section .data\n{NAME}_data:\n    .quad 0\n    .quad 0\n    .quad 0\n.section .text\n.global {NAME}_init\n{NAME}_init:\n    push %rbp\n    mov %rsp, %rbp\n    movq $0, {NAME}_data(%rip)\n    pop %rbp\n    ret",
+                 "; {NAME} object (x64)\n.section .bss\n{NAME}_obj:\n    .space 64\n.section .text\n.global {NAME}_create\n{NAME}_create:\n    push %rbp\n    mov %rsp, %rbp\n    lea {NAME}_obj(%rip), %rax\n    pop %rbp\n    ret"
+             };
+             functionTemplates = {
+                 "; Function {NAME} (x64)\n.section .text\n.global {NAME}\n{NAME}:\n    push %rbp\n    mov %rsp, %rbp\n    ; Function implementation\n    mov $0, %rax\n    pop %rbp\n    ret",
+                 "; {NAME} with parameters (x64)\n.section .text\n.global {NAME}\n{NAME}:\n    push %rbp\n    mov %rsp, %rbp\n    ; rdi = first param, rsi = second param\n    add %rsi, %rdi\n    mov %rdi, %rax\n    pop %rbp\n    ret",
+                 "; {NAME} syscall (x64)\n.section .text\n.global {NAME}\n{NAME}:\n    push %rbp\n    mov %rsp, %rbp\n    mov $60, %rax      ; sys_exit\n    mov $0, %rdi       ; exit status\n    syscall\n    pop %rbp\n    ret"
+             };
+             break;
+            
+                 case Language::ASM_ARM:
+             classTemplates = {
+                 "@ {NAME} data structure (ARM)\n.section .data\n{NAME}_data:\n    .word 0\n    .word 0\n    .word 0\n.section .text\n.global {NAME}_init\n{NAME}_init:\n    push {lr}\n    ldr r0, ={NAME}_data\n    mov r1, #0\n    str r1, [r0]\n    pop {pc}",
+                 "@ {NAME} object (ARM)\n.section .bss\n{NAME}_obj:\n    .space 32\n.section .text\n.global {NAME}_new\n{NAME}_new:\n    push {lr}\n    ldr r0, ={NAME}_obj\n    mov r1, #0\n    str r1, [r0]\n    pop {pc}"
+             };
+             functionTemplates = {
+                 "@ Function {NAME} (ARM)\n.section .text\n.global {NAME}\n{NAME}:\n    push {lr}\n    @ Function body here\n    mov r0, #0\n    pop {pc}",
+                 "@ {NAME} with parameters (ARM)\n.section .text\n.global {NAME}\n{NAME}:\n    push {lr}\n    @ r0 = first param, r1 = second param\n    add r0, r0, r1\n    pop {pc}",
+                 "@ {NAME} system call (ARM)\n.section .text\n.global {NAME}\n{NAME}:\n    push {lr}\n    mov r7, #1     @ sys_exit\n    mov r0, #0     @ exit status\n    swi 0          @ software interrupt\n    pop {pc}"
+             };
+             break;
+            
+                 case Language::ASM_MIPS:
+             classTemplates = {
+                 "# {NAME} data structure (MIPS)\n.data\n{NAME}_data:\n    .word 0\n    .word 0\n    .word 0\n.text\n.globl {NAME}_init\n{NAME}_init:\n    sw $zero, {NAME}_data\n    jr $ra",
+                 "# {NAME} object (MIPS)\n.bss\n{NAME}_obj:\n    .space 32\n.text\n.globl {NAME}_create\n{NAME}_create:\n    la $v0, {NAME}_obj\n    jr $ra"
+             };
+             functionTemplates = {
+                 "# Function {NAME} (MIPS)\n.text\n.globl {NAME}\n{NAME}:\n    # Function body\n    li $v0, 0\n    jr $ra",
+                 "# {NAME} with parameters (MIPS)\n.text\n.globl {NAME}\n{NAME}:\n    # $a0 = first param, $a1 = second param\n    add $v0, $a0, $a1\n    jr $ra",
+                 "# {NAME} system call (MIPS)\n.text\n.globl {NAME}\n{NAME}:\n    li $v0, 10      # sys_exit\n    li $a0, 0       # exit status\n    syscall"
+             };
+             break;
+            
+                 case Language::ASM_RISCV:
+             classTemplates = {
+                 "# {NAME} data structure (RISC-V)\n.section .data\n{NAME}_data:\n    .word 0\n    .word 0\n    .word 0\n.section .text\n.global {NAME}_init\n{NAME}_init:\n    la t0, {NAME}_data\n    sw zero, 0(t0)\n    ret",
+                 "# {NAME} object (RISC-V)\n.section .bss\n{NAME}_obj:\n    .space 32\n.section .text\n.global {NAME}_create\n{NAME}_create:\n    la a0, {NAME}_obj\n    ret"
+             };
+             functionTemplates = {
+                 "# Function {NAME} (RISC-V)\n.section .text\n.global {NAME}\n{NAME}:\n    # Function implementation\n    li a0, 0\n    ret",
+                 "# {NAME} with parameters (RISC-V)\n.section .text\n.global {NAME}\n{NAME}:\n    # a0 = first param, a1 = second param\n    add a0, a0, a1\n    ret",
+                 "# {NAME} system call (RISC-V)\n.section .text\n.global {NAME}\n{NAME}:\n    li a7, 93       # sys_exit\n    li a0, 0        # exit status\n    ecall           # environment call\n    ret"
+             };
+             break;
+            
         default:
             // Default templates for other languages
             classTemplates = {"// {NAME} class placeholder"};
@@ -205,6 +333,21 @@ std::string LanguageCodeGenerator::generateProject(const std::string& projectTyp
             break;
         case Language::RUST:
             project << "fn main() {\n    println!(\"Generated project executing...\");\n}\n";
+            break;
+        case Language::ASM_X86:
+            project << generateX86HelloWorld();
+            break;
+        case Language::ASM_X64:
+            project << generateX64HelloWorld();
+            break;
+        case Language::ASM_ARM:
+            project << generateARMHelloWorld();
+            break;
+        case Language::ASM_MIPS:
+            project << generateMIPSHelloWorld();
+            break;
+        case Language::ASM_RISCV:
+            project << generateRISCVHelloWorld();
             break;
         default:
             project << "// Main entry point\n";
@@ -521,6 +664,124 @@ std::string LanguageCodeGenerator::generateRandomName(const std::string& prefix)
     return prefix + std::to_string(dis(gen));
 }
 
+// Assembly Hello World generators
+std::string LanguageCodeGenerator::generateX86HelloWorld() {
+    return R"(; Generated x86 Assembly Hello World
+.section .data
+    msg: .ascii "Hello from x86 Assembly!\n"
+    msg_len = . - msg
+
+.section .text
+.global _start
+
+_start:
+    ; write system call
+    mov $4, %eax        ; sys_write
+    mov $1, %ebx        ; stdout
+    mov $msg, %ecx      ; message
+    mov $msg_len, %edx  ; length
+    int $0x80           ; system call
+    
+    ; exit system call
+    mov $1, %eax        ; sys_exit
+    mov $0, %ebx        ; exit status
+    int $0x80           ; system call
+)";
+}
+
+std::string LanguageCodeGenerator::generateX64HelloWorld() {
+    return R"(# Generated x64 Assembly Hello World
+.section .data
+    msg: .ascii "Hello from x64 Assembly!\n"
+    msg_len = . - msg
+
+.section .text
+.global _start
+
+_start:
+    # write system call
+    mov $1, %rax        # sys_write
+    mov $1, %rdi        # stdout
+    mov $msg, %rsi      # message
+    mov $msg_len, %rdx  # length
+    syscall             # system call
+    
+    # exit system call
+    mov $60, %rax       # sys_exit
+    mov $0, %rdi        # exit status
+    syscall             # system call
+)";
+}
+
+std::string LanguageCodeGenerator::generateARMHelloWorld() {
+    return R"(@ Generated ARM Assembly Hello World
+.section .data
+    msg: .ascii "Hello from ARM Assembly!\n"
+    msg_len = . - msg
+
+.section .text
+.global _start
+
+_start:
+    @ write system call
+    mov r7, #4          @ sys_write
+    mov r0, #1          @ stdout
+    ldr r1, =msg        @ message
+    mov r2, #msg_len    @ length
+    swi 0               @ software interrupt
+    
+    @ exit system call
+    mov r7, #1          @ sys_exit
+    mov r0, #0          @ exit status
+    swi 0               @ software interrupt
+)";
+}
+
+std::string LanguageCodeGenerator::generateMIPSHelloWorld() {
+    return R"(# Generated MIPS Assembly Hello World
+.data
+    msg: .asciiz "Hello from MIPS Assembly!\n"
+
+.text
+.globl main
+
+main:
+    # print string system call
+    li $v0, 4           # sys_print_string
+    la $a0, msg         # load address of message
+    syscall             # system call
+    
+    # exit system call
+    li $v0, 10          # sys_exit
+    li $a0, 0           # exit status
+    syscall             # system call
+)";
+}
+
+std::string LanguageCodeGenerator::generateRISCVHelloWorld() {
+    return R"(# Generated RISC-V Assembly Hello World
+.section .data
+    msg: .ascii "Hello from RISC-V Assembly!\n"
+    msg_len = . - msg
+
+.section .text
+.global _start
+
+_start:
+    # write system call
+    li a7, 64           # sys_write
+    li a0, 1            # stdout
+    la a1, msg          # message
+    li a2, msg_len      # length
+    ecall               # environment call
+    
+    # exit system call
+    li a7, 93           # sys_exit
+    li a0, 0            # exit status
+    ecall               # environment call
+)";
+}
+
 // ========== MultiLanguageExecutor Implementation ==========
 MultiLanguageExecutor::MultiLanguageExecutor(std::shared_ptr<Logger> log, std::shared_ptr<ConfigManager> cfg)
     : logger(log), config(cfg) {
@@ -541,6 +802,11 @@ void MultiLanguageExecutor::initializeLanguageConfigs() {
     languageConfigs[Language::RUBY] = {"Ruby", ".rb", "", "ruby", "ruby {source}", "gem", {}, {}, false, true};
     languageConfigs[Language::TYPESCRIPT] = {"TypeScript", ".ts", "tsc", "node", "tsc {source}", "npm", {}, {}, true, false};
     languageConfigs[Language::SHELL] = {"Shell", ".sh", "", "bash", "bash {source}", "", {}, {}, false, true};
+    languageConfigs[Language::ASM_X86] = {"Assembly x86", ".asm", "nasm", "", "nasm -f elf32 {source} -o {output}.o && ld -m elf_i386 {output}.o -o {output}", "", {}, {}, true, false};
+    languageConfigs[Language::ASM_X64] = {"Assembly x64", ".s", "as", "", "as --64 {source} -o {output}.o && ld {output}.o -o {output}", "", {}, {}, true, false};
+    languageConfigs[Language::ASM_ARM] = {"Assembly ARM", ".s", "arm-linux-gnueabi-as", "", "arm-linux-gnueabi-as {source} -o {output}.o && arm-linux-gnueabi-ld {output}.o -o {output}", "", {}, {}, true, false};
+    languageConfigs[Language::ASM_MIPS] = {"Assembly MIPS", ".s", "mips-linux-gnu-as", "", "mips-linux-gnu-as {source} -o {output}.o && mips-linux-gnu-ld {output}.o -o {output}", "", {}, {}, true, false};
+    languageConfigs[Language::ASM_RISCV] = {"Assembly RISC-V", ".s", "riscv64-linux-gnu-as", "", "riscv64-linux-gnu-as {source} -o {output}.o && riscv64-linux-gnu-ld {output}.o -o {output}", "", {}, {}, true, false};
 }
 
 bool MultiLanguageExecutor::compileCode(const std::string& sourceFile, Language lang, const std::string& outputFile) {
@@ -859,6 +1125,11 @@ std::string WebConnector::languageToString(Language lang) {
         case Language::PHP: return "php";
         case Language::RUBY: return "ruby";
         case Language::SHELL: return "shell";
+        case Language::ASM_X86: return "assembly";
+        case Language::ASM_X64: return "assembly";
+        case Language::ASM_ARM: return "assembly";
+        case Language::ASM_MIPS: return "assembly";
+        case Language::ASM_RISCV: return "assembly";
         default: return "unknown";
     }
 }
@@ -1080,6 +1351,11 @@ std::string MultiLanguageBot::getLanguageName(Language lang) {
         case Language::SWIFT: return "Swift";
         case Language::KOTLIN: return "Kotlin";
         case Language::CSHARP: return "C#";
+        case Language::ASM_X86: return "Assembly x86";
+        case Language::ASM_X64: return "Assembly x64";
+        case Language::ASM_ARM: return "Assembly ARM";
+        case Language::ASM_MIPS: return "Assembly MIPS";
+        case Language::ASM_RISCV: return "Assembly RISC-V";
         default: return "Unknown";
     }
 }

@@ -106,7 +106,12 @@ void listSupportedLanguages() {
         {"Lua", "lua", "Embedded scripting, game development", false},
         {"R", "r", "Statistical computing, data analysis", false},
         {"SQL", "sql", "Database queries and management", false},
-        {"HTML/CSS", "html", "Web markup and styling", false}
+        {"HTML/CSS", "html", "Web markup and styling", false},
+        {"Assembly x86", "asm-x86/x86", "Low-level x86 assembly programming", true},
+        {"Assembly x64", "asm-x64/x64/asm", "Low-level x64 assembly programming", true},
+        {"Assembly ARM", "asm-arm/arm", "ARM processor assembly", true},
+        {"Assembly MIPS", "asm-mips/mips", "MIPS processor assembly", true},
+        {"Assembly RISC-V", "asm-riscv/riscv", "RISC-V processor assembly", true}
     };
     
     for (const auto& lang : languages) {
@@ -132,6 +137,12 @@ std::string generateCodeStandalone(const std::string& language, const std::strin
     else if (language == "php") lang = Language::PHP;
     else if (language == "ruby" || language == "rb") lang = Language::RUBY;
     else if (language == "shell" || language == "bash") lang = Language::SHELL;
+    else if (language == "asm" || language == "assembly") lang = Language::ASM_X64;
+    else if (language == "asm-x86" || language == "x86") lang = Language::ASM_X86;
+    else if (language == "asm-x64" || language == "x64") lang = Language::ASM_X64;
+    else if (language == "asm-arm" || language == "arm") lang = Language::ASM_ARM;
+    else if (language == "asm-mips" || language == "mips") lang = Language::ASM_MIPS;
+    else if (language == "asm-riscv" || language == "riscv") lang = Language::ASM_RISCV;
     
     auto logger = std::make_shared<Logger>("standalone.log");
     LanguageCodeGenerator generator(lang, logger);
@@ -200,6 +211,12 @@ Language parseLanguage(const std::string& langStr) {
     if (lang == "r") return Language::R;
     if (lang == "sql") return Language::SQL;
     if (lang == "html") return Language::HTML_CSS;
+    if (lang == "asm" || lang == "assembly") return Language::ASM_X64; // Default to x64
+    if (lang == "asm-x86" || lang == "x86") return Language::ASM_X86;
+    if (lang == "asm-x64" || lang == "x64") return Language::ASM_X64;
+    if (lang == "asm-arm" || lang == "arm") return Language::ASM_ARM;
+    if (lang == "asm-mips" || lang == "mips") return Language::ASM_MIPS;
+    if (lang == "asm-riscv" || lang == "riscv") return Language::ASM_RISCV;
     
     return Language::CPP; // Default
 }
