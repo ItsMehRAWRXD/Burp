@@ -1,0 +1,34 @@
+{
+  "runs": [
+    {
+      "goal": "create file /workspace/selfbot_output/demo.txt with hello world",
+      "history": [
+        {
+          "step": 1,
+          "action": "write_file",
+          "params": {
+            "path": "/workspace/selfbot_output/demo.txt",
+            "content": "hello world",
+            "overwrite": true
+          },
+          "ok": true,
+          "message": "Wrote 11 bytes to /workspace/selfbot_output/demo.txt"
+        }
+      ]
+    },
+    {
+      "goal": "list dir /workspace/selfbot_output",
+      "history": [
+        {
+          "step": 1,
+          "action": "list_dir",
+          "params": {
+            "path": "/workspace/selfbot_output"
+          },
+          "ok": true,
+          "message": "Listed 1 entries in /workspace/selfbot_output"
+        }
+      ]
+    }
+  ]
+}
