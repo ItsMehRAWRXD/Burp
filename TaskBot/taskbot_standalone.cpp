@@ -1,201 +1,313 @@
-// TaskBot - Zero Dependencies, Pure Windows API
-// Compiles with: g++ taskbot_standalone.cpp -o taskbot.exe -luser32 -lshell32
-// Or Visual Studio: cl taskbot_standalone.cpp user32.lib shell32.lib
+// TaskBot - Code that Codes
+// A simple code generator that writes other programs
+// Compile: g++ taskbot.cpp -o taskbot.exe
 
-#include <windows.h>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 
-class TaskBot {
+class CodeBot {
+private:
+    std::string currentCode;
+    std::string currentFile;
+    
 public:
-    // Mouse control
-    void moveMouse(int x, int y) {
-        std::cout << "[TaskBot] Moving mouse to (" << x << ", " << y << ")" << std::endl;
-        SetCursorPos(x, y);
-    }
-    
-    void clickMouse() {
-        std::cout << "[TaskBot] Click!" << std::endl;
-        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-        Sleep(50);
-        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-    }
-    
-    void rightClick() {
-        std::cout << "[TaskBot] Right click!" << std::endl;
-        mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
-        Sleep(50);
-        mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
-    }
-    
-    void doubleClick() {
-        std::cout << "[TaskBot] Double click!" << std::endl;
-        clickMouse();
-        Sleep(100);
-        clickMouse();
-    }
-    
-    // Keyboard control
-    void pressKey(BYTE vk) {
-        keybd_event(vk, 0, 0, 0);
-        Sleep(50);
-        keybd_event(vk, 0, KEYEVENTF_KEYUP, 0);
-    }
-    
-    void typeText(const std::string& text) {
-        std::cout << "[TaskBot] Typing: " << text << std::endl;
-        for (char c : text) {
-            if (c == '\n') {
-                pressKey(VK_RETURN);
-            } else {
-                SHORT vk = VkKeyScan(c);
-                BYTE virtualKey = LOBYTE(vk);
-                BYTE shiftState = HIBYTE(vk);
-                
-                if (shiftState & 1) {
-                    keybd_event(VK_SHIFT, 0, 0, 0);
-                }
-                
-                keybd_event(virtualKey, 0, 0, 0);
-                keybd_event(virtualKey, 0, KEYEVENTF_KEYUP, 0);
-                
-                if (shiftState & 1) {
-                    keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0);
-                }
-                
-                Sleep(30);
-            }
-        }
-    }
-    
-    void shortcut(BYTE modifier, BYTE key) {
-        std::cout << "[TaskBot] Shortcut: " << (char)key << std::endl;
-        keybd_event(modifier, 0, 0, 0);
-        keybd_event(key, 0, 0, 0);
-        Sleep(50);
-        keybd_event(key, 0, KEYEVENTF_KEYUP, 0);
-        keybd_event(modifier, 0, KEYEVENTF_KEYUP, 0);
-    }
-    
-    // Window control
-    HWND findWindow(const std::string& title) {
-        std::cout << "[TaskBot] Finding window: " << title << std::endl;
-        return FindWindowA(NULL, title.c_str());
-    }
-    
-    void focusWindow(HWND hwnd) {
-        if (hwnd) {
-            std::cout << "[TaskBot] Focusing window" << std::endl;
-            SetForegroundWindow(hwnd);
-            SetFocus(hwnd);
-        }
-    }
-    
-    // Application control
-    void run(const std::string& program) {
-        std::cout << "[TaskBot] Running: " << program << std::endl;
-        ShellExecuteA(NULL, "open", program.c_str(), NULL, NULL, SW_SHOW);
-        Sleep(1000);
-    }
-    
-    // System control
-    void wait(int ms) {
-        std::cout << "[TaskBot] Waiting " << ms << "ms" << std::endl;
-        Sleep(ms);
-    }
-    
-    POINT getMousePos() {
-        POINT p;
-        GetCursorPos(&p);
-        return p;
-    }
-    
-    // Demo workflows
-    void helloWorldDemo() {
-        std::cout << "\n=== Hello World Demo ===" << std::endl;
-        run("notepad.exe");
-        wait(1000);
-        typeText("Hello World from TaskBot!\n\n");
-        typeText("I can control:\n");
-        typeText("- Your mouse\n");
-        typeText("- Your keyboard\n");
-        typeText("- Your applications\n");
-        typeText("- Your entire system!\n\n");
-        typeText("No dependencies required!");
-    }
-    
-    void drawWithMouse() {
-        std::cout << "\n=== Mouse Drawing Demo ===" << std::endl;
-        run("mspaint.exe");
-        wait(2000);
-        
-        // Draw a square
-        moveMouse(200, 200);
-        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-        
-        moveMouse(400, 200);
-        wait(100);
-        moveMouse(400, 400);
-        wait(100);
-        moveMouse(200, 400);
-        wait(100);
-        moveMouse(200, 200);
-        
-        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-    }
-};
+    // Generate a simple C++ program
+    void generateCppHelloWorld() {
+        currentCode = R"(#include <iostream>
 
-// Simple menu system
-void showMenu() {
-    std::cout << "\nTaskBot Menu:" << std::endl;
-    std::cout << "1. Hello World (Notepad)" << std::endl;
-    std::cout << "2. Mouse Drawing (Paint)" << std::endl;
-    std::cout << "3. Custom Command" << std::endl;
-    std::cout << "4. Exit" << std::endl;
-    std::cout << "Choice: ";
+int main() {
+    std::cout << "Hello World!" << std::endl;
+    return 0;
+})";
+        std::cout << "[CodeBot] Generated C++ Hello World" << std::endl;
+    }
+    
+    // Generate a Python script
+    void generatePythonScript(const std::string& purpose) {
+        if (purpose == "calculator") {
+            currentCode = R"(# Simple Calculator
+def add(a, b): return a + b
+def sub(a, b): return a - b
+def mul(a, b): return a * b
+def div(a, b): return a / b if b != 0 else None
+
+print("Calculator Ready!")
+result = add(10, 5)
+print(f"10 + 5 = {result}")
+)";
+        } else if (purpose == "fileops") {
+            currentCode = R"(# File Operations Script
+import os
+
+def create_file(name, content):
+    with open(name, 'w') as f:
+        f.write(content)
+    print(f"Created {name}")
+
+def read_file(name):
+    with open(name, 'r') as f:
+        return f.read()
+
+# Example usage
+create_file("test.txt", "Hello from Python!")
+print(read_file("test.txt"))
+)";
+        } else {
+            currentCode = R"(# Generated Python Script
+print("This script was generated by TaskBot!")
+for i in range(5):
+    print(f"Line {i+1}")
+)";
+        }
+        std::cout << "[CodeBot] Generated Python " << purpose << " script" << std::endl;
+    }
+    
+    // Generate a batch file
+    void generateBatchScript() {
+        currentCode = R"(@echo off
+echo TaskBot Generated Batch File
+echo ============================
+echo.
+
+echo Creating directories...
+mkdir output 2>nul
+mkdir temp 2>nul
+
+echo Running tasks...
+dir /b > output\files.txt
+echo File list saved!
+
+echo.
+echo Done!
+pause
+)";
+        std::cout << "[CodeBot] Generated Batch script" << std::endl;
+    }
+    
+    // Generate HTML page
+    void generateHTML(const std::string& title) {
+        currentCode = R"(<!DOCTYPE html>
+<html>
+<head>
+    <title>)" + title + R"(</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        h1 { color: #333; }
+        .generated { background: #f0f0f0; padding: 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>)" + title + R"(</h1>
+    <div class="generated">
+        <p>This page was generated by TaskBot!</p>
+        <p>Time: <span id="time"></span></p>
+    </div>
+    <script>
+        document.getElementById('time').innerText = new Date().toLocaleString();
+    </script>
+</body>
+</html>)";
+        std::cout << "[CodeBot] Generated HTML page: " << title << std::endl;
+    }
+    
+    // Generate JavaScript
+    void generateJavaScript() {
+        currentCode = R"(// TaskBot Generated JavaScript
+
+// Simple class
+class TaskRunner {
+    constructor(name) {
+        this.name = name;
+        this.tasks = [];
+    }
+    
+    addTask(task) {
+        this.tasks.push(task);
+        console.log(`Added task: ${task}`);
+    }
+    
+    run() {
+        console.log(`Running ${this.tasks.length} tasks...`);
+        this.tasks.forEach((task, i) => {
+            console.log(`[${i+1}] ${task}`);
+        });
+    }
+}
+
+// Usage
+const bot = new TaskRunner("CodeBot");
+bot.addTask("Generate files");
+bot.addTask("Process data");
+bot.addTask("Create output");
+bot.run();
+)";
+        std::cout << "[CodeBot] Generated JavaScript code" << std::endl;
+    }
+    
+    // Write code to file
+    void writeToFile(const std::string& filename) {
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            file << currentCode;
+            file.close();
+            currentFile = filename;
+            std::cout << "[CodeBot] Wrote code to: " << filename << std::endl;
+        } else {
+            std::cout << "[CodeBot] Error: Could not write to " << filename << std::endl;
+        }
+    }
+    
+    // Display current code
+    void showCode() {
+        std::cout << "\n=== Generated Code ===" << std::endl;
+        std::cout << currentCode << std::endl;
+        std::cout << "===================\n" << std::endl;
+    }
+    
+    // Generate code based on description
+    void generateFromDescription(const std::string& desc) {
+        std::cout << "[CodeBot] Generating code for: " << desc << std::endl;
+        
+        // Simple pattern matching
+        if (desc.find("loop") != std::string::npos) {
+            currentCode = R"(#include <iostream>
+using namespace std;
+
+int main() {
+    // Generated loop code
+    for (int i = 0; i < 10; i++) {
+        cout << "Iteration " << i << endl;
+    }
+    return 0;
+})";
+        } else if (desc.find("array") != std::string::npos) {
+            currentCode = R"(#include <iostream>
+using namespace std;
+
+int main() {
+    // Generated array code
+    int arr[5] = {10, 20, 30, 40, 50};
+    
+    for (int i = 0; i < 5; i++) {
+        cout << "arr[" << i << "] = " << arr[i] << endl;
+    }
+    return 0;
+})";
+        } else if (desc.find("function") != std::string::npos) {
+            currentCode = R"(#include <iostream>
+using namespace std;
+
+// Generated functions
+int add(int a, int b) {
+    return a + b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
 }
 
 int main() {
-    std::cout << "TaskBot - Zero Dependencies Edition" << std::endl;
-    std::cout << "===================================" << std::endl;
-    std::cout << "Pure Windows API, no external libs!" << std::endl;
+    cout << "5 + 3 = " << add(5, 3) << endl;
+    cout << "5 * 3 = " << multiply(5, 3) << endl;
+    return 0;
+})";
+        } else {
+            currentCode = "// TODO: Implement " + desc + "\n";
+        }
+    }
+};
+
+int main() {
+    std::cout << "TaskBot - Code Generator" << std::endl;
+    std::cout << "========================" << std::endl;
+    std::cout << "Code that writes code!\n" << std::endl;
     
-    TaskBot bot;
+    CodeBot bot;
     int choice;
     
     while (true) {
-        showMenu();
+        std::cout << "\nWhat code should I generate?" << std::endl;
+        std::cout << "1. C++ Hello World" << std::endl;
+        std::cout << "2. Python Script" << std::endl;
+        std::cout << "3. Batch File" << std::endl;
+        std::cout << "4. HTML Page" << std::endl;
+        std::cout << "5. JavaScript" << std::endl;
+        std::cout << "6. Custom (describe it)" << std::endl;
+        std::cout << "7. Show current code" << std::endl;
+        std::cout << "8. Save to file" << std::endl;
+        std::cout << "9. Exit" << std::endl;
+        std::cout << "Choice: ";
+        
         std::cin >> choice;
-        std::cin.ignore(); // Clear newline
+        std::cin.ignore();
         
         switch (choice) {
             case 1:
-                bot.helloWorldDemo();
+                bot.generateCppHelloWorld();
+                bot.showCode();
                 break;
                 
-            case 2:
-                bot.drawWithMouse();
-                break;
-                
-            case 3: {
-                std::cout << "Enter command: ";
-                std::string cmd;
-                std::getline(std::cin, cmd);
-                bot.run(cmd);
+            case 2: {
+                std::cout << "Type (calculator/fileops/general): ";
+                std::string type;
+                std::getline(std::cin, type);
+                bot.generatePythonScript(type);
+                bot.showCode();
                 break;
             }
+            
+            case 3:
+                bot.generateBatchScript();
+                bot.showCode();
+                break;
                 
-            case 4:
+            case 4: {
+                std::cout << "Page title: ";
+                std::string title;
+                std::getline(std::cin, title);
+                bot.generateHTML(title.empty() ? "TaskBot Page" : title);
+                bot.showCode();
+                break;
+            }
+            
+            case 5:
+                bot.generateJavaScript();
+                bot.showCode();
+                break;
+                
+            case 6: {
+                std::cout << "Describe what to generate: ";
+                std::string desc;
+                std::getline(std::cin, desc);
+                bot.generateFromDescription(desc);
+                bot.showCode();
+                break;
+            }
+            
+            case 7:
+                bot.showCode();
+                break;
+                
+            case 8: {
+                std::cout << "Filename: ";
+                std::string filename;
+                std::getline(std::cin, filename);
+                if (!filename.empty()) {
+                    bot.writeToFile(filename);
+                }
+                break;
+            }
+            
+            case 9:
                 std::cout << "Goodbye!" << std::endl;
                 return 0;
                 
             default:
                 std::cout << "Invalid choice!" << std::endl;
         }
-        
-        std::cout << "\nPress Enter to continue...";
-        std::cin.get();
     }
     
     return 0;
