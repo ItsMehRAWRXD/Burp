@@ -303,4 +303,7 @@ namespace Utils {
 
 } // namespace TaskBot
 
+// Include IDE integration header
+#include "ide_integration.h"
+
 #endif // TASK_BOT_H
