@@ -34,3 +34,23 @@ Minimal shape:
 Supported actions: `print`, `set`, `write_file`, `read_file`, `run`, `http_get`, `sleep`, `copy`, `call_self`.
 
 Use `{var}` placeholders in strings to reference variables set via `--var/--varjson`, `set`, or outputs from actions.
+
+## Rent A Coder workflow (C++)
+
+Actions: `cpp_scaffold`, `cpp_add_class`, `cpp_write_main`, `cpp_compile`, `cpp_run_binary`, `zip_project`.
+
+Example job:
+
+```
+python3 /workspace/selfbot/selfbot.py run \
+  --task-file /workspace/selfbot/tasks/rentacoder.json \
+  --var project_dir=/workspace/rac/MyProject \
+  --var app_name=MyApp \
+  --var class_name=Greeter \
+  --verbose | cat
+```
+
+Result:
+- Project at `/workspace/rac/MyProject`
+- Binary at `/workspace/rac/MyProject/build/MyApp` (also copied to `bin/`)
+- Zip at `/workspace/rac/MyProject.zip`

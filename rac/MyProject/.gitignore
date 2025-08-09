@@ -1,0 +1,8 @@
+/build/
+/bin/
+/*.zip
+*.o
+*.obj
+*.exe
+*.out
+.DS_Store
