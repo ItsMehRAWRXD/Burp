@@ -1,0 +1,301 @@
+# Makefile for Multi-Language CodeGeneratorBot v2.0
+# Internet-Connected Multi-Language AI Bot
+
+# Compiler settings
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -pthread
+LDFLAGS = -pthread -lcurl -ljsoncpp
+
+# Debug flags (uncomment for debugging)
+# CXXFLAGS += -g -DDEBUG
+
+# Directories
+SRCDIR = .
+OBJDIR = obj
+BINDIR = bin
+
+# Source files for multi-language bot
+ML_SOURCES = multilang_main.cpp MultiLanguageBot.cpp CodeGeneratorBot.cpp
+ML_OBJECTS = $(ML_SOURCES:%.cpp=$(OBJDIR)/%.o)
+ML_TARGET = $(BINDIR)/multilang_bot
+
+# Source files for original bot
+ORIG_SOURCES = main.cpp CodeGeneratorBot.cpp
+ORIG_OBJECTS = $(ORIG_SOURCES:%.cpp=$(OBJDIR)/%.o)
+ORIG_TARGET = $(BINDIR)/codegen_bot
+
+# Default target - build both bots
+all: check-deps directories $(ML_TARGET) $(ORIG_TARGET)
+
+# Check dependencies
+check-deps:
+	@echo "Checking dependencies for Multi-Language Bot..."
+	@which g++ > /dev/null || (echo "Error: g++ not found. Please install build-essential." && exit 1)
+	@pkg-config --exists libcurl || (echo "Warning: libcurl not found. Internet features may not work." && echo "Install with: sudo apt install libcurl4-openssl-dev")
+	@pkg-config --exists jsoncpp || (echo "Warning: jsoncpp not found. GitHub integration may not work." && echo "Install with: sudo apt install libjsoncpp-dev")
+	@g++ --version | head -1
+	@echo "Dependencies check completed."
+
+# Install required dependencies
+install-deps:
+	@echo "Installing required dependencies..."
+	sudo apt update
+	sudo apt install -y build-essential libcurl4-openssl-dev libjsoncpp-dev
+	@echo "Dependencies installed successfully!"
+
+# Create necessary directories
+directories:
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(BINDIR)
+	@mkdir -p multilang_workspace
+	@mkdir -p multilang_workspace/cpp
+	@mkdir -p multilang_workspace/python
+	@mkdir -p multilang_workspace/javascript
+	@mkdir -p multilang_workspace/rust
+	@mkdir -p multilang_workspace/go
+	@mkdir -p multilang_workspace/java
+	@mkdir -p multilang_workspace/generated
+	@mkdir -p multilang_workspace/logs
+
+# Build the multi-language bot
+$(ML_TARGET): $(ML_OBJECTS)
+	@echo "Linking Multi-Language Bot: $(ML_TARGET)..."
+	$(CXX) $(ML_OBJECTS) -o $(ML_TARGET) $(LDFLAGS)
+	@echo "✅ Multi-Language Bot build completed successfully!"
+	@echo "Run './$(ML_TARGET) --help' for usage information"
+
+# Build the original bot
+$(ORIG_TARGET): $(ORIG_OBJECTS)
+	@echo "Linking Original Bot: $(ORIG_TARGET)..."
+	$(CXX) $(ORIG_OBJECTS) -o $(ORIG_TARGET) -pthread
+	@echo "✅ Original Bot build completed successfully!"
+
+# Compile source files
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@echo "Compiling $<..."
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Build only multi-language bot
+multilang: check-deps directories $(ML_TARGET)
+
+# Build only original bot
+original: directories $(ORIG_TARGET)
+
+# Install multi-language bot system-wide
+install: $(ML_TARGET)
+	@echo "Installing Multi-Language Bot..."
+	sudo cp $(ML_TARGET) /usr/local/bin/multilang_bot
+	sudo cp $(ORIG_TARGET) /usr/local/bin/codegen_bot 2>/dev/null || true
+	@echo "Installation completed. You can now run:"
+	@echo "  'multilang_bot' - Multi-language bot with internet"
+	@echo "  'codegen_bot'   - Original simple bot"
+
+# Clean build artifacts
+clean:
+	@echo "Cleaning build artifacts..."
+	rm -rf $(OBJDIR)
+	rm -rf $(BINDIR)
+	@echo "Clean completed."
+
+# Clean everything including generated files and logs
+distclean: clean
+	@echo "Performing deep clean..."
+	rm -rf multilang_workspace
+	rm -rf bot_workspace
+	rm -f multilang_bot_config.txt
+	rm -f bot_config.txt
+	rm -f *.log
+	rm -f standalone.log
+	@echo "Deep clean completed."
+
+# Quick test runs
+test-multilang: $(ML_TARGET)
+	./$(ML_TARGET) --list-languages
+
+test-original: $(ORIG_TARGET)
+	./$(ORIG_TARGET) --demo
+
+# Run multi-language bot
+run-multilang: $(ML_TARGET)
+	./$(ML_TARGET)
+
+# Run with specific language
+run-python: $(ML_TARGET)
+	./$(ML_TARGET) --language python --auto-start
+
+run-javascript: $(ML_TARGET)
+	./$(ML_TARGET) --language javascript --auto-start
+
+run-rust: $(ML_TARGET)
+	./$(ML_TARGET) --language rust --auto-start
+
+run-go: $(ML_TARGET)
+	./$(ML_TARGET) --language go --auto-start
+
+# Demo modes for different languages
+demo-python: $(ML_TARGET)
+	./$(ML_TARGET) --demo python
+
+demo-javascript: $(ML_TARGET)
+	./$(ML_TARGET) --demo javascript
+
+demo-rust: $(ML_TARGET)
+	./$(ML_TARGET) --demo rust
+
+demo-go: $(ML_TARGET)
+	./$(ML_TARGET) --demo go
+
+demo-cpp: $(ML_TARGET)
+	./$(ML_TARGET) --demo cpp
+
+demo-java: $(ML_TARGET)
+	./$(ML_TARGET) --demo java
+
+# Generate specific code types
+generate-webapp-python: $(ML_TARGET)
+	./$(ML_TARGET) --generate webapp --language python --output webapp.py
+
+generate-api-javascript: $(ML_TARGET)
+	./$(ML_TARGET) --generate api --language javascript --output api.js
+
+generate-class-rust: $(ML_TARGET)
+	./$(ML_TARGET) --generate class --language rust --output class.rs
+
+generate-script-shell: $(ML_TARGET)
+	./$(ML_TARGET) --generate script --language shell --output script.sh
+
+# Development builds
+debug: CXXFLAGS += -g -DDEBUG -O0
+debug: clean multilang
+
+# Performance build
+release: CXXFLAGS += -O3 -DNDEBUG
+release: clean multilang
+
+# Package for distribution
+package: clean
+	@echo "Creating distribution package..."
+	tar -czf multilang_bot_v2.0.tar.gz *.cpp *.h Makefile* README.md 2>/dev/null || \
+	tar -czf multilang_bot_v2.0.tar.gz *.cpp *.h Makefile*
+	@echo "Package created: multilang_bot_v2.0.tar.gz"
+
+# Show help for available targets
+help:
+	@echo "Multi-Language CodeGeneratorBot v2.0 Makefile"
+	@echo ""
+	@echo "🏗️  Build Targets:"
+	@echo "  all              - Build both multi-language and original bots"
+	@echo "  multilang        - Build only multi-language bot"
+	@echo "  original         - Build only original bot"
+	@echo "  debug            - Build with debug symbols"
+	@echo "  release          - Build optimized release version"
+	@echo ""
+	@echo "🔧 Setup:"
+	@echo "  check-deps       - Check required dependencies"
+	@echo "  install-deps     - Install required dependencies (Ubuntu/Debian)"
+	@echo "  install          - Install bots system-wide"
+	@echo ""
+	@echo "🧹 Cleanup:"
+	@echo "  clean            - Remove build artifacts"
+	@echo "  distclean        - Remove all generated files"
+	@echo ""
+	@echo "🚀 Quick Run:"
+	@echo "  run-multilang    - Run multi-language bot interactively"
+	@echo "  run-python       - Run with Python as default language"
+	@echo "  run-javascript   - Run with JavaScript as default language"
+	@echo "  run-rust         - Run with Rust as default language"
+	@echo "  run-go           - Run with Go as default language"
+	@echo ""
+	@echo "🎬 Demos:"
+	@echo "  demo-python      - Python demo"
+	@echo "  demo-javascript  - JavaScript demo"
+	@echo "  demo-rust        - Rust demo"
+	@echo "  demo-go          - Go demo"
+	@echo "  demo-cpp         - C++ demo"
+	@echo "  demo-java        - Java demo"
+	@echo ""
+	@echo "⚡ Quick Generation:"
+	@echo "  generate-webapp-python     - Generate Python web app"
+	@echo "  generate-api-javascript    - Generate JavaScript API"
+	@echo "  generate-class-rust        - Generate Rust class"
+	@echo "  generate-script-shell      - Generate shell script"
+	@echo ""
+	@echo "🧪 Testing:"
+	@echo "  test-multilang   - Test multi-language bot"
+	@echo "  test-original    - Test original bot"
+	@echo ""
+	@echo "📦 Distribution:"
+	@echo "  package          - Create distribution package"
+
+# Show available programming languages
+languages: $(ML_TARGET)
+	./$(ML_TARGET) --list-languages
+
+# Show evolution from original to enhanced
+evolution:
+	@echo ""
+	@echo "🔄 Evolution: Simple → Multi-Language Bot"
+	@echo "═══════════════════════════════════════════"
+	@echo ""
+	@echo "BEFORE (Original):"
+	@echo "  ✓ C++ only"
+	@echo "  ✓ Basic class/function generation"
+	@echo "  ✓ No internet connectivity"
+	@echo "  ✓ No package management"
+	@echo ""
+	@echo "AFTER (Enhanced):"
+	@echo "  🚀 20+ Programming languages"
+	@echo "  🌐 Internet connectivity"
+	@echo "  📦 Package manager integration"
+	@echo "  🔍 GitHub repository search"
+	@echo "  💡 StackOverflow integration"
+	@echo "  🖥️  Web application generation"
+	@echo "  🔌 API server generation"
+	@echo "  🤖 Autonomous learning"
+	@echo "  📊 Performance monitoring"
+	@echo "  🔧 Multi-threaded execution"
+	@echo ""
+
+# Check what programming languages are actually available on the system
+check-languages:
+	@echo "🔍 Checking available programming language support..."
+	@echo ""
+	@echo "Compiled Languages:"
+	@printf "  C++:        " && (g++ --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  Rust:       " && (rustc --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  Go:         " && (go version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  Java:       " && (javac -version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  TypeScript: " && (tsc --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found (npm install -g typescript)")
+	@echo ""
+	@echo "Interpreted Languages:"
+	@printf "  Python:     " && (python3 --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  JavaScript: " && (node --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  PHP:        " && (php --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  Ruby:       " && (ruby --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@printf "  Shell:      " && (bash --version > /dev/null 2>&1 && echo "✅ Available" || echo "❌ Not found")
+	@echo ""
+
+# Setup development environment
+setup-dev: install-deps directories
+	@echo "Setting up development environment..."
+	@echo "Creating sample configuration..."
+	@echo "# Multi-Language Bot Configuration" > multilang_bot_config.txt
+	@echo "default_language=python" >> multilang_bot_config.txt
+	@echo "internet_enabled=true" >> multilang_bot_config.txt
+	@echo "auto_fetch_templates=true" >> multilang_bot_config.txt
+	@echo "github_integration=true" >> multilang_bot_config.txt
+	@echo "max_concurrent_tasks=5" >> multilang_bot_config.txt
+	@echo "Development environment setup complete!"
+
+# Phony targets
+.PHONY: all clean distclean multilang original run-multilang run-python run-javascript run-rust run-go
+.PHONY: demo-python demo-javascript demo-rust demo-go demo-cpp demo-java
+.PHONY: generate-webapp-python generate-api-javascript generate-class-rust generate-script-shell
+.PHONY: debug release check-deps install-deps install test-multilang test-original
+.PHONY: package help languages evolution check-languages setup-dev directories
+
+# Dependencies
+$(OBJDIR)/multilang_main.o: multilang_main.cpp MultiLanguageBot.h CodeGeneratorBot.h
+$(OBJDIR)/MultiLanguageBot.o: MultiLanguageBot.cpp MultiLanguageBot.h CodeGeneratorBot.h
+$(OBJDIR)/CodeGeneratorBot.o: CodeGeneratorBot.cpp CodeGeneratorBot.h
+$(OBJDIR)/main.o: main.cpp CodeGeneratorBot.h

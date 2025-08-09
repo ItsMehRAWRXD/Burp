@@ -1,0 +1,8 @@
+# CodeGeneratorBot Configuration
+auto_compile=true
+auto_execute=true
+compiler=g++
+compiler_flags=-std=c++17 -O2
+max_tasks_per_hour=108
+self_improvement_interval=300
+working_directory=bot_workspace
