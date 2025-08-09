@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <iomanip>
+#include <cstdint>
 
 class LearnRE {
 private:
