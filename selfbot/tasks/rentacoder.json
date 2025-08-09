@@ -1,0 +1,14 @@
+{
+  "name": "rent-a-coder-sample",
+  "steps": [
+    {"action": "print", "params": {"message": "Starting job for {app_name} at {project_dir}"}},
+    {"action": "cpp_scaffold", "params": {"project_dir": "{project_dir}", "name": "{app_name}"}},
+    {"action": "cpp_add_class", "params": {"project_dir": "{project_dir}", "class_name": "{class_name}"}},
+    {"action": "cpp_write_main", "params": {"project_dir": "{project_dir}", "use_class": "{class_name}"}},
+    {"action": "cpp_compile", "params": {"project_dir": "{project_dir}", "output": "{app_name}", "to": "binary_path"}},
+    {"action": "cpp_run_binary", "params": {"project_dir": "{project_dir}", "binary_name": "{app_name}", "to": "run_output"}},
+    {"action": "print", "params": {"message": "Run output:\n{run_output}"}},
+    {"action": "zip_project", "params": {"project_dir": "{project_dir}", "zip_path": "{project_dir}.zip", "to": "zip_path"}},
+    {"action": "print", "params": {"message": "Project zipped at {zip_path}"}}
+  ]
+}
