@@ -29,13 +29,36 @@ set(SOURCES
     src/config_manager.cpp
     src/scheduler.cpp
     src/utils.cpp
+    src/input_simulator.cpp
+    src/web_search.cpp
+    src/autopilot_manager.cpp
 )
 
 # Create executable
 add_executable(taskbot ${SOURCES})
 
+# Find required packages
+find_package(X11 REQUIRED)
+find_package(CURL REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+# Find jsoncpp using pkg-config
+pkg_check_modules(JSONCPP REQUIRED jsoncpp)
+
+# Include directories
+include_directories(${X11_INCLUDE_DIR})
+include_directories(${CURL_INCLUDE_DIRS})
+include_directories(${JSONCPP_INCLUDE_DIRS})
+
 # Link libraries
-target_link_libraries(taskbot pthread stdc++fs)
+target_link_libraries(taskbot 
+    pthread 
+    stdc++fs
+    ${X11_LIBRARIES}
+    ${X11_Xtst_LIB}
+    ${CURL_LIBRARIES}
+    ${JSONCPP_LIBRARIES}
+)
 
 # Installation
 install(TARGETS taskbot DESTINATION bin)
@@ -51,9 +74,19 @@ add_library(taskbot_lib STATIC
     src/config_manager.cpp
     src/scheduler.cpp
     src/utils.cpp
+    src/input_simulator.cpp
+    src/web_search.cpp
+    src/autopilot_manager.cpp
 )
 
-target_link_libraries(taskbot_lib pthread stdc++fs)
+target_link_libraries(taskbot_lib 
+    pthread 
+    stdc++fs
+    ${X11_LIBRARIES}
+    ${X11_Xtst_LIB}
+    ${CURL_LIBRARIES}
+    ${JSONCPP_LIBRARIES}
+)
 
 # Install library
 install(TARGETS taskbot_lib DESTINATION lib)

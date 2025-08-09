@@ -1,4 +1,6 @@
 #include "../include/task_bot.h"
+#include "../include/autopilot.h"
+#include "../include/ide_integration.h"
 #include <iostream>
 #include <memory>
 #include <csignal>
@@ -94,8 +96,91 @@ public:
     }
 };
 
+void demonstrateAutoPilot() {
+    std::cout << "=== TaskBot AutoPilot Demonstration ===\n\n";
+    std::cout << "WARNING: This will control your mouse and keyboard!\n";
+    std::cout << "Press Ctrl+C to stop at any time.\n\n";
+    
+    // Initialize AutoPilot
+    auto autoPilot = std::make_shared<AutoPilotManager>();
+    
+    // Create task manager
+    TaskManager taskManager;
+    g_taskManager = &taskManager;
+    
+    // 1. Mouse automation demo
+    std::cout << "1. Mouse Automation Demo\n";
+    auto mouseTask = std::make_shared<AutoPilotTask>(
+        "Mouse Demo",
+        AutoPilotTask::Operation::EXECUTE_WORKFLOW,
+        autoPilot,
+        std::map<std::string, std::string>{{"workflow", "switch_windows"}}
+    );
+    taskManager.addTask(mouseTask);
+    
+    // 2. Keyboard automation demo
+    std::cout << "2. Keyboard Automation Demo\n";
+    autoPilot->registerWorkflow("type_demo", [&autoPilot]() {
+        std::cout << "[Demo] Typing demonstration text" << std::endl;
+        autoPilot->getInputSimulator().typeText("Hello from TaskBot AutoPilot! ");
+        autoPilot->getInputSimulator().typeText("I can automate any application.");
+        return true;
+    });
+    
+    // 3. Web search integration demo
+    std::cout << "3. Web Search Integration Demo\n";
+    auto searchTask = std::make_shared<AutoPilotTask>(
+        "Search and Automate",
+        AutoPilotTask::Operation::CUSTOM_AUTOMATION,
+        autoPilot,
+        std::map<std::string, std::string>{{"task", "open terminal and list files"}}
+    );
+    taskManager.addTask(searchTask);
+    
+    // 4. Screenshot capture demo
+    std::cout << "4. Screenshot Capture Demo\n";
+    auto screenshotTask = std::make_shared<AutoPilotTask>(
+        "Take Screenshot",
+        AutoPilotTask::Operation::EXECUTE_WORKFLOW,
+        autoPilot,
+        std::map<std::string, std::string>{{"workflow", "take_screenshot"}}
+    );
+    taskManager.addTask(screenshotTask);
+    
+    // 5. Application synchronization demo
+    std::cout << "5. Application Synchronization Demo (if multiple apps are open)\n";
+    auto syncTask = std::make_shared<AutoPilotTask>(
+        "Sync Apps",
+        AutoPilotTask::Operation::EXECUTE_WORKFLOW,
+        autoPilot,
+        std::map<std::string, std::string>{{"workflow", "copy_paste_between_apps"}}
+    );
+    taskManager.addTask(syncTask);
+    
+    // Start execution
+    std::cout << "\n--- Starting AutoPilot Demonstration ---\n";
+    std::cout << "The bot will now take control of your system\n";
+    std::cout << "Press Ctrl+C to stop\n\n";
+    
+    taskManager.start();
+    
+    // Wait for completion
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+    
+    taskManager.stop();
+    
+    // Show results
+    auto completed = taskManager.getCompletedTasks();
+    std::cout << "\n--- AutoPilot Tasks Completed ---\n";
+    for (const auto& task : completed) {
+        std::cout << "- " << task->getName() << " [" 
+                  << (task->getStatus() == TaskStatus::COMPLETED ? "SUCCESS" : "FAILED") 
+                  << "]\n";
+    }
+}
+
 void demonstrateTaskBot() {
-    std::cout << "=== TaskBot Demonstration ===\n\n";
+    std::cout << "=== TaskBot Core Demonstration ===\n\n";
     
     // Initialize components
     Logger& logger = Logger::getInstance();
@@ -215,17 +300,28 @@ int main(int argc, char* argv[]) {
     std::signal(SIGTERM, signalHandler);
     
     try {
-        if (argc > 1 && std::string(argv[1]) == "--demo") {
-            demonstrateTaskBot();
+        if (argc > 1) {
+            std::string arg = argv[1];
+            if (arg == "--demo") {
+                demonstrateTaskBot();
+            } else if (arg == "--autopilot") {
+                demonstrateAutoPilot();
+            } else if (arg == "--help") {
+                // Show help
+            } else {
+                std::cout << "Unknown option: " << arg << std::endl;
+                return 1;
+            }
         } else {
-            std::cout << "TaskBot - A Self-Sustained Automation Bot\n";
-            std::cout << "==========================================\n\n";
+            std::cout << "TaskBot - A Self-Sustained Automation Bot with AutoPilot\n";
+            std::cout << "========================================================\n\n";
             std::cout << "Usage: " << argv[0] << " [options]\n";
             std::cout << "Options:\n";
-            std::cout << "  --demo    Run demonstration of all features\n";
-            std::cout << "  --help    Show this help message\n\n";
+            std::cout << "  --demo        Run core TaskBot demonstration\n";
+            std::cout << "  --autopilot   Run AutoPilot system demonstration\n";
+            std::cout << "  --help        Show this help message\n\n";
             
-            std::cout << "Features:\n";
+            std::cout << "Core Features:\n";
             std::cout << "- Multi-threaded task execution with priority queue\n";
             std::cout << "- File operations (create, read, update, delete, copy, move)\n";
             std::cout << "- System monitoring (CPU, memory, disk usage)\n";
@@ -234,6 +330,16 @@ int main(int argc, char* argv[]) {
             std::cout << "- Configuration management\n";
             std::cout << "- Comprehensive logging system\n";
             std::cout << "- Custom task creation\n\n";
+            
+            std::cout << "AutoPilot Features:\n";
+            std::cout << "- System-wide keyboard and mouse automation\n";
+            std::cout << "- Application window management and control\n";
+            std::cout << "- Screen capture and OCR capabilities\n";
+            std::cout << "- Web search integration for automation\n";
+            std::cout << "- Macro recording and playback\n";
+            std::cout << "- Multi-application orchestration\n";
+            std::cout << "- IDE integration with code completion\n";
+            std::cout << "- Automated data extraction and entry\n\n";
             
             std::cout << "Example usage in your code:\n";
             std::cout << "  TaskManager manager;\n";

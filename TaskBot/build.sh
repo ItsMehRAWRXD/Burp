@@ -30,6 +30,46 @@ if ! command -v g++ &> /dev/null; then
     exit 1
 fi
 
+# Check for required libraries
+echo "Checking for required libraries..."
+
+MISSING_DEPS=""
+
+# Check for X11 development files
+if ! pkg-config --exists x11; then
+    MISSING_DEPS="$MISSING_DEPS libx11-dev"
+fi
+
+# Check for XTest
+if ! pkg-config --exists xtst; then
+    MISSING_DEPS="$MISSING_DEPS libxtst-dev"
+fi
+
+# Check for CURL
+if ! pkg-config --exists libcurl; then
+    MISSING_DEPS="$MISSING_DEPS libcurl4-openssl-dev"
+fi
+
+# Check for jsoncpp
+if ! pkg-config --exists jsoncpp; then
+    MISSING_DEPS="$MISSING_DEPS libjsoncpp-dev"
+fi
+
+if [ ! -z "$MISSING_DEPS" ]; then
+    echo -e "${YELLOW}Missing dependencies: $MISSING_DEPS${NC}"
+    echo "Install them with:"
+    echo -e "${GREEN}sudo apt-get install $MISSING_DEPS${NC}"
+    echo ""
+    read -p "Do you want to install them now? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo apt-get update
+        sudo apt-get install -y $MISSING_DEPS
+    else
+        exit 1
+    fi
+fi
+
 # Check g++ version for C++17 support
 GCC_VERSION=$(g++ -dumpversion | cut -f1 -d.)
 if [ "$GCC_VERSION" -lt 7 ]; then
