@@ -99,11 +99,6 @@ public:
         Sleep(1000);
     }
     
-    void openWebsite(const std::string& url) {
-        std::cout << "[TaskBot] Opening: " << url << std::endl;
-        ShellExecuteA(NULL, "open", url.c_str(), NULL, NULL, SW_SHOW);
-    }
-    
     // System control
     void wait(int ms) {
         std::cout << "[TaskBot] Waiting " << ms << "ms" << std::endl;
@@ -128,14 +123,6 @@ public:
         typeText("- Your applications\n");
         typeText("- Your entire system!\n\n");
         typeText("No dependencies required!");
-    }
-    
-    void webSearchDemo() {
-        std::cout << "\n=== Web Search Demo ===" << std::endl;
-        openWebsite("https://www.google.com");
-        wait(3000);
-        typeText("how to automate windows with c++");
-        pressKey(VK_RETURN);
     }
     
     void drawWithMouse() {
@@ -163,10 +150,9 @@ public:
 void showMenu() {
     std::cout << "\nTaskBot Menu:" << std::endl;
     std::cout << "1. Hello World (Notepad)" << std::endl;
-    std::cout << "2. Web Search Demo" << std::endl;
-    std::cout << "3. Mouse Drawing (Paint)" << std::endl;
-    std::cout << "4. Custom Command" << std::endl;
-    std::cout << "5. Exit" << std::endl;
+    std::cout << "2. Mouse Drawing (Paint)" << std::endl;
+    std::cout << "3. Custom Command" << std::endl;
+    std::cout << "4. Exit" << std::endl;
     std::cout << "Choice: ";
 }
 
@@ -189,14 +175,10 @@ int main() {
                 break;
                 
             case 2:
-                bot.webSearchDemo();
-                break;
-                
-            case 3:
                 bot.drawWithMouse();
                 break;
                 
-            case 4: {
+            case 3: {
                 std::cout << "Enter command: ";
                 std::string cmd;
                 std::getline(std::cin, cmd);
@@ -204,7 +186,7 @@ int main() {
                 break;
             }
                 
-            case 5:
+            case 4:
                 std::cout << "Goodbye!" << std::endl;
                 return 0;
                 
